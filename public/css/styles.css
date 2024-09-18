@@ -1,6 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&display=swap');
+
+:root {
+  --font1: 'Inter', sans-serif;
+  --font2: 'Cormorant', sans-serif;
+  --colorBlue: #4687c2
+}
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+body {
+  font-size: 16px;
+  font-family: var(--font2);
+  font-weight: 400;
+  background-image: url('../images/site/checkerboard.jpg');
+}
+
+#wrapper {
+  background-color: white;
+  margin: 15px 30px;
+  padding: 15px;
+  border:5px solid var(--colorBlue);
+  border-radius: 20px;
+}
+/* -----header styles----- */
+#top-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.siteName {
+  font-size: 1.5rem;
+  font-family: var(--font1);
+  font-weight: 700;
+}
+
+#tools {
+  font-family: var(--font1);
+}
+/* -----end of header styles------ */
+
+/* -----navigation styles------ */
+nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style-type: none;
+  background-color: black;
+  color: white;
+  padding: 5px;
+  font-family: var(--font1);
+}
+/* -----end of navigation styles------ */
+
+/* -----body styles----- */
+.hero-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.hero-car {
+  width: 90%;
+}
+
+.hero-description {
+  background-color: white;
+  opacity: 90%;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  color: var(--colorBlue);
+  line-height: 40%;
+  font-size: 14px;
+}
+
+.hero-description p {
+  font-family: var(--font1);
+}
+.hero-button {
+  border-style: outset;
+  border-width: 4px;
+  max-width: 120px;
+  width: 80%;
+}
+
+.info-container .reviews-card ul li {
+  font-family: var(--font1);
+  padding: 5px;
+}
+
+.info-container .upgrades-card .upgrades-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.info-container .upgrades-card .upgrades-images > div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info-container .upgrades-card .upgrades-images .img-box {
+  background-color: var(--colorBlue);
+  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.info-container .upgrades-card .upgrades-images .link-box {
+  display: flex;
+  justify-content: center;
+}
+/* -----end of body styles----- */
+
+/* -----footer styles----- */
+footer p {
+  font-family: var(--font1);
+}
+/* -----end of footer styles----- */
+
+
+/* -----RWD----- */
+@media screen and (min-width: 460px) {
+  .info-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+  }
+  .hero-description {
+    top: 10px;
+    left: 25px;
+    line-height: 60%;
+    font-size: 16px;
+  }
+  .hero-car {
+    max-width: 500px;
+    width: 90%;
+  }
 }
