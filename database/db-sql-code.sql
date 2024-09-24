@@ -2,7 +2,7 @@ CREATE TYPE public.account_type AS ENUM
     ('Client', 'Employee', 'Admin');
 
 ALTER TYPE public.account_type
-    OWNER TO cse340_database_t87d_user;
+    OWNER TO cse340;
 
 -- Table structure for talbe 'classification'
 CREATE TABLE public.classification (
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS public.inventory
 	inv_color character varying NOT NULL,
 	classification_id integer NOT NULL,
 	CONSTRAINT inventory_pkey PRIMARY KEY (inv_id)
-)
+);
 
 -- Create relationship between 'classification' and 'inventory' tables
 ALTER TABLE IF EXISTS public.inventory
@@ -241,7 +241,7 @@ VALUES   (
 -- 4. Modify the "GM Hummer" record to read "a huge interior" rather than "small interiors" using a single query
 UPDATE inventory
 SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interior')
-WHERE inv_make = 'GM' AND inv_model = 'Hummer'
+WHERE inv_make = 'GM' AND inv_model = 'Hummer';
 
 -- 5. Use an inner join to select the make and model fields from the inventory table and the classification name field from the classification table for inventory items that belong to the "Sport" category
 SELECT 
@@ -251,10 +251,11 @@ SELECT
 FROM inventory
 INNER JOIN classification
 ON inventory.classification_id = classification.classification_id
-WHERE classification.classification_name = 'Sport'
+WHERE classification.classification_name = 'Sport';
 
 -- 6. Update all records in the inventory table to add "/vehicles" to the middle of the file path in the inv_image and inv_thumbnail columns using a single query
 UPDATE inventory
 SET 
 	inv_image = REPLACE(inv_image, '/images', '/images/vehicles'),
-	inv_thumbnail = REPLACE(inv_thumbnail, '/images', 'images/vehicles')
+	inv_thumbnail = REPLACE(inv_thumbnail, '/images', 'images/vehicles');
+
