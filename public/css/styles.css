@@ -54,6 +54,18 @@ nav ul {
   padding: 5px;
   font-family: var(--font1);
 }
+
+nav ul a:link {
+  color: white;
+  text-decoration: none;
+}
+nav ul a:visited {
+  color: white
+}
+nav ul a:hover {
+  color: black;
+  background-color: white
+}
 /* -----end of navigation styles------ */
 
 /* -----body styles----- */
