@@ -130,11 +130,44 @@ nav ul a:hover {
   display: flex;
   justify-content: center;
 }
+
+#inv-display {
+  width: 100%;
+  margin: auto;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  /* border: 1px solid red; */
+}
+
+#inv-display li {
+  width: 300px;
+  margin: 10px;
+  padding: 10px;
+  background-color: #f4f1f1;
+}
+
+#inv-display li > a {
+  display: block;
+  text-align: center;
+}
+
+#inv-display li > div {
+  text-align: center;
+}
+
+.namePrice span {
+  font-family: var(--font1);
+}
 /* -----end of body styles----- */
 
 /* -----footer styles----- */
 footer p {
   font-family: var(--font1);
+  text-align: center;
 }
 /* -----end of footer styles----- */
 
@@ -155,5 +188,12 @@ footer p {
   .hero-car {
     max-width: 500px;
     width: 90%;
+  }
+
+  #inv-display {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 }
