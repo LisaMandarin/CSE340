@@ -36,4 +36,18 @@ invCont.buildByInventoryId = async function (req, res, next) {
   })
 }
 
+invCont.buildError = async function (req, res, next) {
+  const inv_id = 100
+  const data = await invModel.getInventoryByInvId(inv_id)
+  const vehicle = data[0]
+  const content = await utilities.buildInventoryDetails(vehicle)
+  let nav = await utilities.getNav()
+  const vehicleName = `${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}`
+  res.render("./inventory/vehicleDetails", {
+    title: vehicleName,
+    nav,
+    content
+  })
+}
+
 module.exports = invCont
