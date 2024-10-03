@@ -33,7 +33,7 @@ Util.buildClassificationGrid = async function(data){
     grid = '<ul id="inv-display">'
     data.forEach(vehicle => { 
       grid += '<li>'
-      grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
+      grid +=  '<a href="/inv/detail/'+ vehicle.inv_id 
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
       + ' details"><img src="' + vehicle.inv_thumbnail 
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
@@ -55,6 +55,30 @@ Util.buildClassificationGrid = async function(data){
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
   return grid
+}
+
+Util.buildInventoryDetails = async function(data) {
+  let content
+  
+  if (data) {
+    const usPrice = new Intl.NumberFormat('en-US').format(data.inv_price)
+    content = `
+      <div class="inventory-detail-card">
+        <h2>${data.inv_make} ${data.inv_model} Details</h2>
+        <div class="price-box"><span>Price: $${usPrice}<span></div>
+        <div class="image-box">
+          <img src='${data.inv_image}' alt='photo of ${data.inv_year} ${data.inv_make} ${data.inv_model}'>
+        </div>
+        <p class="description-box">${data.inv_description}</p>
+        <div class="color-box"><span>Color: ${data.inv_color}</span></div>
+        <div class="miles-box"><span>${data.inv_miles}</span></div>
+      </div>
+      `
+  } else {
+    content += "<p>Oops...the details of the vehicle is not available right now.  Please try again later.</p>"
+  }
+  
+  return content
 }
 
 /* ****************************************
