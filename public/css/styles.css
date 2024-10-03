@@ -47,6 +47,7 @@ body {
 nav ul {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-around;
   list-style-type: none;
   background-color: black;
@@ -162,6 +163,23 @@ nav ul a:hover {
 .namePrice span {
   font-family: var(--font1);
 }
+
+.inventory-detail-card {
+  font-family: var(--font1);
+}
+.inventory-detail-card .image-box img {
+  width: 100%;
+  max-width: fit-content;
+}
+
+.inventory-detail-card .detail-box > div {
+  padding: 5px;
+}
+
+.inventory-detail-card .detail-box > div:nth-child(even) {
+  background-color: #f8f5f5;
+}
+
 /* -----end of body styles----- */
 
 /* -----footer styles----- */
@@ -173,6 +191,22 @@ footer p {
 
 
 /* -----RWD----- */
+@media screen and (min-width: 760px) {
+  #inv-display {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .inventory-detail-card {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+  }
+}
+
 @media screen and (min-width: 460px) {
   .info-container {
     display: flex;
@@ -190,10 +224,4 @@ footer p {
     width: 90%;
   }
 
-  #inv-display {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-  }
 }

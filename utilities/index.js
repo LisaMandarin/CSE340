@@ -62,16 +62,19 @@ Util.buildInventoryDetails = async function(data) {
   
   if (data) {
     const usPrice = new Intl.NumberFormat('en-US').format(data.inv_price)
+    const usMiles = new Intl.NumberFormat('en-US').format(data.inv_miles)
     content = `
       <div class="inventory-detail-card">
-        <h2>${data.inv_make} ${data.inv_model} Details</h2>
-        <div class="price-box"><span>Price: $${usPrice}<span></div>
         <div class="image-box">
           <img src='${data.inv_image}' alt='photo of ${data.inv_year} ${data.inv_make} ${data.inv_model}'>
         </div>
-        <p class="description-box">${data.inv_description}</p>
-        <div class="color-box"><span>Color: ${data.inv_color}</span></div>
-        <div class="miles-box"><span>${data.inv_miles}</span></div>
+        <div class="detail-box">
+          <h3>${data.inv_make} ${data.inv_model} Details</h3>
+          <div class="price"><strong>Price: </strong>$${usPrice}</div>
+          <div class="description"><strong>Description: </strong>${data.inv_description}</div>
+          <div class="color"><strong>Color: </strong>${data.inv_color}</div>
+          <div class="miles"><strong>Miles: </strong>${usMiles}</div>
+        </div>
       </div>
       `
   } else {
