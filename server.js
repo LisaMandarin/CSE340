@@ -12,6 +12,7 @@ const app = express()
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
 const baseController = require("./controllers/baseController")
+const invController = require("./controllers/invController")
 const utilities = require("./utilities/")
 
 /* ***********************
@@ -28,6 +29,7 @@ app.set("layout", "./layouts/layout")
 app.use(static)
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
+
 app.use("/inv", inventoryRoute)
 
 // File Not Found Route - must be last route in list
