@@ -56,6 +56,10 @@ nav ul {
   font-family: var(--font1);
 }
 
+nav ul li {
+  padding: 5px;
+}
+
 nav ul a:link {
   color: white;
   text-decoration: none;
