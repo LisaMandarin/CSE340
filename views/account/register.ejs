@@ -1,0 +1,52 @@
+<div id="login-form">
+    <% if (title) { %>
+        <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+    
+    <%- messages() %>
+
+    <form>
+        <div>
+            <label for="firstName">First name:</label><br>
+            <input type="text" id="firstName" name="account_firstname" required>
+        </div>
+
+        <div>
+            <label for="lastName">Last name:</label><br>
+            <input type="text" id="lastName" name="account_lastname" required>
+        </div>
+
+        <div>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="account_email" required>
+        </div>
+        
+        <div>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="account_password" pattern="(?=.*\d)(?=.*[A-Z])(?=.*[^\w\s].*).{12,}"  required>
+            <button type=button id="toggleShowPW">Show Password</button>
+        </div>
+        
+        <div class="login-submit">
+            <input type="submit" value="Register" >
+        </div>
+    </form>
+ </div>
+
+ <script>
+    const toggleShowPW = document.getElementById('toggleShowPW')
+    toggleShowPW.addEventListener('click', () => {
+        const pwInput = document.getElementById('password')
+        const type = pwInput.getAttribute('type')
+
+        if (type === "password") {
+            pwInput.setAttribute('type', 'text')
+            toggleShowPW.innerHTML = "Hide Password"
+        } else {
+            pwInput.setAttribute('type', 'password')
+            toggleShowPW.innerHTML = 'Show Password'
+        }
+    })
+ </script>
