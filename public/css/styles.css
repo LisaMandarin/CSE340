@@ -184,26 +184,26 @@ nav ul a:hover {
   background-color: #f8f5f5;
 }
 
-#login-form {
+.form-container {
   font-family: var(--font1);
   width: 400px;
   margin: auto;
 }
 
-#login-form h1 {
+.form-container h1 {
   font-family: var(--font2);
 }
-#login-form form {
+.form-container form {
   width: 100%;
   background-color: rgb(241, 241, 241);
   padding: 10px;
 }
 
-#login-form form > div {
+.form-container form > div {
   padding-bottom: 10px;
 }
 
-#login-form form > div input {
+.form-container form > div input {
   font-size: 1rem;
   padding: 5px;
   width: 100%;
@@ -211,16 +211,17 @@ nav ul a:hover {
   border: .5px solid gray;
 }
 
-#login-form form .login-submit {
+.form-container form .login-submit {
   display: flex;
   justify-content: center;
   padding-bottom: 0;
 }
-#login-form form > div input[type="submit"] {
+.form-container form > div input[type="submit"] {
   border: 0px;
   border-radius: 50px;
   width: 100px;
-  background-color: #1677FF;
+  /* background-color: #1677FF; */
+  background-color: #113be4;
   color: white;
 }
 
