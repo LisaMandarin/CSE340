@@ -243,6 +243,11 @@ nav ul a:hover {
   text-align: center;
 }
 
+.form-container .notice {
+  color: red;
+}
+
+
 /* -----end of body styles----- */
 
 /* -----footer styles----- */
