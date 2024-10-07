@@ -211,6 +211,20 @@ nav ul a:hover {
   border: .5px solid gray;
 }
 
+.form-container form .form-hint {
+  font-size: .7rem;
+}
+
+.form-container form > div input:invalid {
+  border: .5px solid red;
+  background-color: rgb(241, 215, 215);
+}
+
+.form-container form > div label.required:after {
+  content: " *";
+  color: red;
+}
+
 .form-container form .login-submit {
   display: flex;
   justify-content: center;

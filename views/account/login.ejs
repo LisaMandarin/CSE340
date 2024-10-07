@@ -1,4 +1,4 @@
-<div id="login-form" class="form-container">
+<div class="form-container">
     <% if (title) { %>
         <h1><%= title %></h1>
     <% } else {
@@ -9,13 +9,13 @@
 
     <form>
         <div>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="account_email" required>
+            <label for="email" class="required">Email:</label><br>
+            <input type="email" id="email" name="account_email" placeholder="Enter your first name" required>
         </div>
         
         <div>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="account_password" required>
+            <label for="password" class="required">Password:</label><br>
+            <input type="password" id="password" name="account_password" placeholder="Enter your password"  required>
         </div>
         
         <div class="login-submit">
