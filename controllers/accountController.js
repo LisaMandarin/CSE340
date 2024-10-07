@@ -72,12 +72,8 @@ async function loginAccount(req, res) {
     account_password
   )
   if (loginResult) {
-    req.flash(
-      "notice",
-      `Congratulations, you\'ve logged in.  Your email is ${account_email}`
-    )
-    
-    // res.status(200).send("Login successful")
+    res.status(200).send('Login successful')  
+  
   } else {
     req.flash("notice", "Sorry, Invalid email or password.")
     res.status(401).render("account/login", {
