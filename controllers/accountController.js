@@ -83,11 +83,11 @@ async function loginAccount(req, res) {
   let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
   
-  const loginResult = await accountModel.loginAccount(
+  const account = await accountModel.loginAccount(
     account_email,
-    account_password
   )
-  if (loginResult) {
+  
+  if (await bcrypt.compare(account_password, account.account_password)) {
     res.status(200).send('Login successful')  
   } else {
     req.flash("notice", "Sorry, Invalid email or password.")
