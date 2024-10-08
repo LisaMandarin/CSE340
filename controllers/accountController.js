@@ -44,7 +44,7 @@ async function registerAccount(req, res) {
     res.status(500).render("account/register", {
       title: "Registration",
       nav,
-      errors: [{msg: error.message}]
+      errors: null
     })
   }
 
@@ -94,6 +94,7 @@ async function loginAccount(req, res) {
     res.status(401).render("account/login", {
       title: "Login",
       nav,
+      errors: null
     })
   }
 }
