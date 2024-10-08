@@ -32,7 +32,6 @@ async function loginAccount(account_email, account_password){
   try {
     const sql = "SELECT * FROM account WHERE account_email = $1 AND account_password = $2"
     const account = await pool.query(sql, [account_email, account_password])
-
     return account.rowCount
   } catch (error) {
     return error.message
