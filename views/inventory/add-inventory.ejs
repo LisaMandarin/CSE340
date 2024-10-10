@@ -3,7 +3,7 @@
 
     <%- messages() %>
 
-    <form class="form-container" action="/inv/add-inventory" method="post">
+    <form action="/inv/add-inventory" method="post">
         <% if (errors ) { %>
             <ul class="notice">
                 <% errors.array().forEach(error => { %>
@@ -13,7 +13,7 @@
         <% } %>
 
         <div>
-            <label for="classification_name" class="required">Classification</label><br>
+            <label for="classificationList" class="required">Classification</label><br>
             <%- classificationNames %>
         </div>
         <div>
