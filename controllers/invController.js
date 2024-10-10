@@ -114,4 +114,43 @@ invCont.buildAddInv = async function(req, res, next) {
   })
 }
 
+invCont.addInventory = async function(req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id
+  } = req.body
+  const vehicle = `${inv_year} ${inv_make} ${inv_model}`
+  
+  let addResult = await invModel.addInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id)
+  
+  if (addResult) {
+    req.flash("notice", `${vehicle} has been added to the inventory`)
+    let nav = utilities.getNav()
+    let classificationNames = utilities.buildClassificationList(classification_id)
+    res.status(201).render("./inventory/management", {
+      nav,
+      title: "Vehicle Management",
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Adding vehicle failed")
+    res.status(501).render("./inventory/add-inventory", {
+      nav,
+      title: "Add a Vehicle",
+      classificationNames,
+      errors,
+    })
+  }
+  
+}
+
 module.exports = invCont
