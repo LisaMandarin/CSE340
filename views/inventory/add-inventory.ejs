@@ -1,0 +1,45 @@
+<div id="add-inventory" class="form-container">
+    <h1><%= title %></h1>
+    <form class="form-container" action="/inv/add-inventory" method="post">
+        <div>
+            <label for="classification_name" class="required">Classification</label><br>
+            <%- classificationNames %>
+        </div>
+        <div>
+            <label for="inv_make" class="required">Make</label><br>
+            <input type="text" id="inv_make" name="inv_make" minlength="3" placeholder="Min of 3 characters" required>
+        </div>
+        <div>
+            <label for="inv_model" class="required">Model</label><br>
+            <input type="text" id="inv_model" name="inv_model" minlength="3" placeholder="Min of 3 characters" required>
+        </div>
+        <div>
+            <label for="inv_description" class="required">Description</label><br>
+            <textarea id="inv_description" name="inv_description" rows="3" required></textarea>
+        </div>
+        <div>
+            <label for="inv_image" class="required">Image Path</label><br>
+            <input type="text" id="inv_image" name="inv_image" value="/images/vehicles/no-images.png" required>
+        </div>
+        <div>
+            <label for="inv_thumbnail" class="required">Thumbnail Path</label>
+            <input type="text" id="inv_thumbnail" name="inv_thumbnail" value="/images/vehicles/no-image.png" required>
+        </div>
+        <div>
+            <label for="inv_price" class="required">Price</label><br>
+            <input type="number" id="inv_price" name="inv_price" min="0" placeholder="decimal or integer" required>
+        </div>
+        <div>
+            <label for="inv_year" class="required">Year</label><br>
+            <input type="number" id="inv_year" name="inv_year" placeholder="4-digit year" min="1000" max="9999" required>
+        </div>
+        <div>
+            <label for="inv_miles" class="required">Miles</label><br>
+            <input type="number" id="inv_miles" name="inv_miles" min="0" placeholder="digits only" required>
+        </div>
+        <div>
+            <label for="inv_color" class="required">Color</label>
+            <input type="text" id="inv_color" name="inv_color" pattern="[A-Za-z]+" required>
+        </div>
+    </form>
+</div>

@@ -11,6 +11,8 @@ router.get("/detail/:invId", utilities.handleErrors(invController.buildByInvento
 router.get("/error", utilities.handleErrors(invController.buildError));
 router.get("/", utilities.handleErrors(invController.buildManagement));
 router.get("/add-classification", utilities.handleErrors(invController.buildAddView));
+router.get("/add-inventory", utilities.handleErrors(invController.buildAddInv));
+
 
 router.post(
     "/add-classification", 

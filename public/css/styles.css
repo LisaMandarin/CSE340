@@ -206,7 +206,6 @@ nav ul a:hover {
 .form-container form > div input {
   font-size: 1rem;
   padding: 5px;
-  width: 100%;
   border-radius: 5px;
   border: .5px solid gray;
 }
@@ -215,11 +214,30 @@ nav ul a:hover {
   font-size: .7rem;
 }
 
+.form-container form input[type="text"],
+.form-container form input[type="number"],
+.form-container form textarea {
+  width: 100%;
+  padding: ;
+}
+
+#classificationList {
+  width: 100%;
+  font-size: 1rem;
+  padding: 5px;
+  border-radius: 5px;
+  border: .5px solid gray;
+}
+
 .form-container form > div input:invalid {
   border: .5px solid red;
   background-color: rgb(241, 215, 215);
 }
 
+.form-container form > div textarea:invalid {
+  border: .5px solid red;
+  background-color: rgb(241, 215, 215);
+}
 .form-container form > div label.required:after {
   content: " *";
   color: red;
