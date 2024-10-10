@@ -42,7 +42,7 @@
         </div>
         <div>
             <label for="inv_year" class="required">Year</label><br>
-            <input type="number" id="inv_year" name="inv_year" placeholder="4-digit year" min="1000" max="9999" required value="<%= locals.inv_year %>">
+            <input type="number" id="inv_year" name="inv_year" placeholder="4-digit year" min="1000" max="<%= new Date().getFullYear() %>" required value="<%= locals.inv_year %>">
         </div>
         <div>
             <label for="inv_miles" class="required">Miles</label><br>
@@ -50,7 +50,7 @@
         </div>
         <div>
             <label for="inv_color" class="required">Color</label>
-            <input type="text" id="inv_color" name="inv_color" pattern="[A-Za-z\s]+" required <%= locals.inv_color %>>
+            <input type="text" id="inv_color" name="inv_color" pattern="[A-Za-z\s]+" required value="<%= locals.inv_color %>">
         </div>
         <div class="submit">
             <input type="submit" value="Add Vehicle">

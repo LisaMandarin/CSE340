@@ -44,20 +44,37 @@ body {
 /* -----end of header styles------ */
 
 /* -----navigation styles------ */
+nav {
+  position: relative;
+}
+
+nav #nav-btn {
+  padding: 15px;
+}
+
 nav ul {
+  position: absolute;
+  top: 50px;
+  left: -160px;
+  margin-top: 0;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: column;
   list-style-type: none;
+  width: fit-content;
   background-color: black;
   color: white;
   padding: 5px;
   font-family: var(--font1);
+  z-index: 100;
+  transition: left 1s ease
+}
+
+nav ul.open-menu {
+  left: 0;
 }
 
 nav ul li {
-  padding: 5px;
+  padding: 15px;
 }
 
 nav ul a:link {
@@ -171,9 +188,14 @@ nav ul a:hover {
 .inventory-detail-card {
   font-family: var(--font1);
 }
+
+.inventory-detail-card .image-box {
+  text-align: center;
+}
 .inventory-detail-card .image-box img {
   width: 100%;
   max-width: fit-content;
+  
 }
 
 .inventory-detail-card .detail-box {
@@ -190,7 +212,8 @@ nav ul a:hover {
 
 .form-container {
   font-family: var(--font1);
-  width: 400px;
+  max-width: 400px;
+  min-width: 100%;
   margin: auto;
 }
 
@@ -322,6 +345,23 @@ footer p {
 }
 
 @media screen and (min-width: 460px) {
+  nav #nav-btn {
+    display: none;
+  }
+  nav ul {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  nav ul li {
+    padding: 5px;
+  }
+
   .info-container {
     display: flex;
     flex-direction: row-reverse;

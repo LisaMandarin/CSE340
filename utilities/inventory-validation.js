@@ -8,10 +8,9 @@ validate.classificationRules = () => {
         body("classification_name")
         .trim()
         .escape()
-        .notEmpty()
-        .isLength({min: 1})
-        .isAlpha()
-        .withMessage("A valid classification name is required.")
+        .notEmpty().withMessage("New classification name is required.")
+        .isLength({min: 1}).withMessage("Enter at least one character.")
+        .isAlpha().withMessage("Only alphabetic letters are allowed.")
         .custom(async(classification_name) => {
             const nameExists = await invModel.checkExistingName(classification_name)
             if (nameExists) {
@@ -39,64 +38,55 @@ validate.checkClassificationName = async(req, res, next) => {
 }
 
 validate.invRules = () => {
+    const thisYear = new Date().getFullYear()
     return [
         body("classification_id")
-        .notEmpty()
-        .isInt()
-        .withMessage("Choose a valid classification."),
+        .notEmpty().withMessage("Choose a classification")
+        .isInt().withMessage("Invalid classification"),
 
         body("inv_make")
         .trim()
         .escape()
-        .notEmpty()
-        .isAlphanumeric()
-        .isLength({min: 3})
-        .withMessage("Enter a valid vehicle make."),
+        .notEmpty().withMessage("Make is required")
+        .isAlphanumeric().withMessage("Only alphabetic letters and numbers are allowed in make")
+        .isLength({min: 3}).withMessage("At least 3 characters in make"),
 
         body("inv_model")
         .trim()
         .escape()
-        .notEmpty()
-        .isAlphanumeric()
-        .isLength({min: 3})
-        .withMessage("Enter a valid vehicle model."),
+        .notEmpty().withMessage("Model is required.")
+        .isAlphanumeric().withMessage("Only alphabetic letters and numbers are allowed in model.")
+        .isLength({min: 3}).withMessage("At least 3 characters in model"),
 
         body("inv_year")
-        .notEmpty()
-        .isInt({min: 1000, max: 9999})
-        .withMessage("Enter a valid year."),
+        .notEmpty().withMessage("Year is required")
+        .isInt({min: 1000, max: thisYear}).withMessage("Enter a valid year"),
 
         body("inv_description")
         .trim()
         .escape()
-        .notEmpty()
-        .withMessage("Enter the vehicle description."),
+        .notEmpty().withMessage("Description is required"),
 
         body("inv_image")
         .trim()
-        .notEmpty()
-        .withMessage("Enter the image path."),
+        .notEmpty().withMessage("Image path is required."),
 
         body("inv_thumbnail")
         .trim()
-        .notEmpty()
-        .withMessage("Enter the thumbnail path."),
+        .notEmpty().withMessage("Thumbnail image path is required"),
 
         body("inv_price")
-        .notEmpty()
-        .isFloat({min: 0})
-        .withMessage("Enter price in decimal or integer."),
+        .notEmpty().withMessage("Price is required.")
+        .isFloat({min: 0}).withMessage("Enter price in decimal or integer."),
 
         body("inv_miles")
-        .notEmpty()
-        .isFloat({min: 0, max: 999999999})
-        .withMessage("Enter digits only"),
+        .notEmpty().withMessage("Miles is required")
+        .isFloat({min: 0, max: 999999999}).withMessage("Enter digits only"),
 
         body("inv_color")
         .trim()
         .escape()
-        .notEmpty()
-        .withMessage("Enter a valid color")
+        .notEmpty().withMessage("Color is required")
         
     ]
 }
@@ -117,8 +107,8 @@ validate.checkInvName = async(req, res, next) => {
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
-        let nav = utilities.getNav()
-        let classificationNames = await utilities.buildClassificationList()
+        let nav = await utilities.getNav()
+        let classificationNames = await utilities.buildClassificationList(classification_id)
         res.render("inventory/add-inventory", {
             nav,
             title: "Add New Vehicle",

@@ -12,26 +12,23 @@ validate.registrationRules = () => {
         body("account_firstname")
         .trim()
         .escape()
-        .notEmpty()
-        .isLength({ min: 1 })
-        .withMessage("Please provide a first name."), // on error this message is sent.
+        .notEmpty().withMessage("First name is required.")
+        .isLength({ min: 1 }).withMessage("At least 1 character in First name"),
 
         // lastname is required and must be string
         body("account_lastname")
         .trim()
         .escape()
-        .notEmpty()
-        .isLength({ min: 2 })
-        .withMessage("Please provide a last name."), // on error this message is sent.
+        .notEmpty().withMessage("Last name is required.")
+        .isLength({ min: 2 }).withMessage("At least 2 characters in Last name"),
 
         // valid email is required and cannot already exist in the DB
         body("account_email")
         .trim()
         .escape()
-        .notEmpty()
-        .isEmail()
+        .notEmpty().withMessage("Email is required.")
+        .isEmail().withMessage("Email format is not correct.")
         .normalizeEmail() // refer to validator.js docs
-        .withMessage("A valid email is required.")
         .custom(async (account_email) => {
             const emailExists = await accountModel.checkExistingEmail(account_email)
             if (emailExists) {
@@ -85,11 +82,9 @@ validate.loginRules = () => {
         body("account_email")
         .trim()
         .escape()
-        .notEmpty()
-        .isEmail()
-        .normalizeEmail() // refer to validator.js docs
-        .withMessage("A valid email is required."),
-    
+        .notEmpty().withMessage("Email is required")
+        .isEmail().withMessage("Email format is not correct")
+        .normalizeEmail() // refer to validator.js docs   
     ]
     }
 
