@@ -233,7 +233,8 @@ nav ul a:hover {
 .form-container form > div input[type="submit"] {
   border: 0px;
   border-radius: 50px;
-  width: 100px;
+  min-width: 100px;
+  width: fit-content;
   /* background-color: #1677FF; */
   background-color: #113be4;
   color: white;
@@ -244,6 +245,30 @@ nav ul a:hover {
 }
 
 .form-container .notice {
+  color: red;
+}
+
+.form-container .notice li {
+  list-style: none;
+}
+
+#inventory-management ul li {
+  list-style: none;
+  font-family: var(--font1);
+  padding-bottom: 15px;
+}
+
+#inventory-management .notice {
+  color: red;
+}
+
+#add-classification form > div > input:invalid {
+  border: .5px solid red;
+  background-color: rgb(241, 215, 215);
+}
+
+#add-classification form > div label.required:after {
+  content: " *";
   color: red;
 }
 
