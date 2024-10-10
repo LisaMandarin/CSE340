@@ -176,6 +176,10 @@ nav ul a:hover {
   max-width: fit-content;
 }
 
+.inventory-detail-card .detail-box {
+  flex-grow: 1;
+}
+
 .inventory-detail-card .detail-box > div {
   padding: 5px;
 }
