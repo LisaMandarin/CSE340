@@ -74,9 +74,9 @@ invCont.addClassification = async function (req, res, next) {
   const { classification_name } = req.body
   
   let addResult = await invModel.addClassification(classification_name)
+  nav = await utilities.getNav()
   
   if (addResult) {
-    nav = await utilities.getNav()
     req.flash(
       "notice",
       `You have added a new classification ${classification_name}`
@@ -95,12 +95,6 @@ invCont.addClassification = async function (req, res, next) {
       errors: null,
     })
   }
-
-  res.render("./inventory/add-classification", {
-    title: "Add New Classification",
-    nav,
-    errors: null
-  })
 }
 
 invCont.buildAddInv = async function(req, res, next) {
@@ -108,7 +102,7 @@ invCont.buildAddInv = async function(req, res, next) {
   let classificationNames = await utilities.buildClassificationList()
   res.render("./inventory/add-inventory", {
     nav,
-    title: "Add a Vehicle",
+    title: "Add New Vehicle",
     classificationNames,
     errors: null
   })
@@ -131,11 +125,10 @@ invCont.addInventory = async function(req, res, next) {
   const vehicle = `${inv_year} ${inv_make} ${inv_model}`
   
   let addResult = await invModel.addInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id)
+  let classificationNames = utilities.buildClassificationList(classification_id)
   
   if (addResult) {
     req.flash("notice", `${vehicle} has been added to the inventory`)
-    let nav = utilities.getNav()
-    let classificationNames = utilities.buildClassificationList(classification_id)
     res.status(201).render("./inventory/management", {
       nav,
       title: "Vehicle Management",
@@ -145,9 +138,9 @@ invCont.addInventory = async function(req, res, next) {
     req.flash("notice", "Adding vehicle failed")
     res.status(501).render("./inventory/add-inventory", {
       nav,
-      title: "Add a Vehicle",
+      title: "Add New Vehicle",
       classificationNames,
-      errors,
+      errors: null,
     })
   }
   

@@ -30,11 +30,11 @@
         </div>
         <div>
             <label for="inv_image" class="required">Image Path</label><br>
-            <input type="text" id="inv_image" name="inv_image" value="/images/vehicles/no-images.png" required>
+            <input type="text" id="inv_image" name="inv_image" value="/images/vehicles/no-image.png" required>
         </div>
         <div>
             <label for="inv_thumbnail" class="required">Thumbnail Path</label>
-            <input type="text" id="inv_thumbnail" name="inv_thumbnail" value="/images/vehicles/no-image.png" required>
+            <input type="text" id="inv_thumbnail" name="inv_thumbnail" value="/images/vehicles/no-image-tn.png" required>
         </div>
         <div>
             <label for="inv_price" class="required">Price</label><br>
@@ -50,7 +50,7 @@
         </div>
         <div>
             <label for="inv_color" class="required">Color</label>
-            <input type="text" id="inv_color" name="inv_color" pattern="[A-Za-z]+" required <%= locals.inv_color %>>
+            <input type="text" id="inv_color" name="inv_color" pattern="[A-Za-z\s]+" required <%= locals.inv_color %>>
         </div>
         <div class="submit">
             <input type="submit" value="Add Vehicle">

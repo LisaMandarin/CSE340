@@ -41,8 +41,6 @@ validate.checkClassificationName = async(req, res, next) => {
 validate.invRules = () => {
     return [
         body("classification_id")
-        .trim()
-        .escape()
         .notEmpty()
         .isInt()
         .withMessage("Choose a valid classification."),
@@ -64,8 +62,6 @@ validate.invRules = () => {
         .withMessage("Enter a valid vehicle model."),
 
         body("inv_year")
-        .trim()
-        .escape()
         .notEmpty()
         .isInt({min: 1000, max: 9999})
         .withMessage("Enter a valid year."),
@@ -78,28 +74,22 @@ validate.invRules = () => {
 
         body("inv_image")
         .trim()
-        .escape()
         .notEmpty()
         .withMessage("Enter the image path."),
 
         body("inv_thumbnail")
         .trim()
-        .escape()
         .notEmpty()
         .withMessage("Enter the thumbnail path."),
 
         body("inv_price")
-        .trim()
-        .escape()
         .notEmpty()
         .isFloat({min: 0})
         .withMessage("Enter price in decimal or integer."),
 
         body("inv_miles")
-        .trim()
-        .escape()
         .notEmpty()
-        .isFloat({min: 0})
+        .isFloat({min: 0, max: 999999999})
         .withMessage("Enter digits only"),
 
         body("inv_color")
@@ -131,7 +121,7 @@ validate.checkInvName = async(req, res, next) => {
         let classificationNames = await utilities.buildClassificationList()
         res.render("inventory/add-inventory", {
             nav,
-            title: "Add a Vehicle",
+            title: "Add New Vehicle",
             classificationNames,
             errors,
             inv_make,
