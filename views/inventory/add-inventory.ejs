@@ -1,6 +1,17 @@
 <div id="add-inventory" class="form-container">
     <h1><%= title %></h1>
+
+    <%- messages() %>
+
     <form class="form-container" action="/inv/add-inventory" method="post">
+        <% if (errors ) { %>
+            <ul class="notice">
+                <% errors.array().forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %> 
+            </ul>
+        <% } %>
+
         <div>
             <label for="classification_name" class="required">Classification</label><br>
             <%- classificationNames %>
@@ -40,6 +51,9 @@
         <div>
             <label for="inv_color" class="required">Color</label>
             <input type="text" id="inv_color" name="inv_color" pattern="[A-Za-z]+" required>
+        </div>
+        <div class="submit">
+            <input type="submit" value="Add Vehicle">
         </div>
     </form>
 </div>

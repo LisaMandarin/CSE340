@@ -214,11 +214,10 @@ nav ul a:hover {
   font-size: .7rem;
 }
 
-.form-container form input[type="text"],
-.form-container form input[type="number"],
+.form-container form input,
 .form-container form textarea {
   width: 100%;
-  padding: ;
+  padding: 5px;
 }
 
 #classificationList {
@@ -243,7 +242,7 @@ nav ul a:hover {
   color: red;
 }
 
-.form-container form .login-submit {
+.form-container form .submit{
   display: flex;
   justify-content: center;
   padding-bottom: 0;
