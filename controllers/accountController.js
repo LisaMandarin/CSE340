@@ -94,7 +94,8 @@ async function loginAccount(req, res) {
     res.status(401).render("account/login", {
       title: "Login",
       nav,
-      errors: null
+      errors: null,
+      account_email
     })
   }
 }
