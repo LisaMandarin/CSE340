@@ -40,15 +40,23 @@ async function getInventoryByInvId(inv_id) {
 
 async function addClassification(classification_name) {
   try {
-    const data = await pool.query(
-      `INSERT INTO classification (classification_name)
-      VALUES ($1) `,
-      [classification_name]
-    )
+    const sql = "INSERT INTO classification (classification_name) VALUES ($1)"
+    const data = await pool.query(sql, [classification_name])
     return data.rows
   } catch (error) {
     console.error("Failed to add classification name: ", error)
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId, addClassification}
+async function checkExistingName(classification_name) {
+  try {
+    const sql = "SELECT * FROM classification WHERE classification_name = $1"
+    const name = await pool.query(sql, [classification_name])
+    return name.rowCount
+  } catch(error) {
+    console.error(error.message)
+    return 'This classification name already exists'
+  }
+}
+
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByInvId, addClassification, checkExistingName}
