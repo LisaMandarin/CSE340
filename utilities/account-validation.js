@@ -42,7 +42,7 @@ validate.registrationRules = () => {
         // password is required and must be strong password
         body("account_password")
         .trim()
-        .notEmpty()
+        .notEmpty().withMessage("Password can't be empty.")
         .isStrongPassword({
             minLength: 12,
             minLowercase: 1,
