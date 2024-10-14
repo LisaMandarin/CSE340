@@ -19,6 +19,11 @@ router.post(
     "/login",
     accountValidate.loginRules(),
     accountValidate.checkLoginData,
-    utilities.handleErrors(accountController.loginAccount)
+    utilities.handleErrors(accountController.accountLogin)
   )
+
+router.get('/',
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildManagement))
+
 module.exports =router

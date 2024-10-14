@@ -1,0 +1,21 @@
+<div id="account-management">
+    <% if (title) { %>
+        <h1><%= title %></h1>
+    <% } %>
+
+    <h3>Welcome <%= locals.account_firstname %></h3>
+    
+    <%- messages() %>
+    
+    <% if (errors) { %>
+        <ul class="notice">
+            <% errors.array().forEach(error => { %>
+                <li><%= error.msg%></li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+    <p><a href="#">Edit Account Information</a></p>
+    
+</div>
+

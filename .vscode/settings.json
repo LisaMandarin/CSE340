@@ -4,6 +4,7 @@
     "firstname",
     "lastname",
     "livin",
+    "loggedin",
     "resave",
     "travelling"
   ]
