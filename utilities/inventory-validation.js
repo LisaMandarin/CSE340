@@ -37,6 +37,10 @@ validate.checkClassificationName = async(req, res, next) => {
     next()
 }
 
+
+/*  **********************************
+*  Inventory Data Validation Rules
+* ********************************* */
 validate.invRules = () => {
     const thisYear = new Date().getFullYear()
     return [
@@ -91,7 +95,10 @@ validate.invRules = () => {
     ]
 }
 
-validate.checkInvName = async(req, res, next) => {
+/* ******************************
+* Check data and return errors or continue to add inventory
+* ***************************** */
+validate.checkInventoryData = async(req, res, next) => {
     const {
         inv_make,
         inv_model,
@@ -108,11 +115,11 @@ validate.checkInvName = async(req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav()
-        let classificationNames = await utilities.buildClassificationList(classification_id)
+        let classificationSelect = await utilities.buildClassificationList(classification_id)
         res.render("inventory/add-inventory", {
             nav,
             title: "Add New Vehicle",
-            classificationNames,
+            classificationSelect,
             errors,
             inv_make,
             inv_model,
@@ -124,6 +131,51 @@ validate.checkInvName = async(req, res, next) => {
             inv_miles,
             inv_color,
             classification_id,
+        })
+        return
+    }
+    next()
+}
+
+
+/* ******************************
+* Check data and return errors or continue to update inventory
+* ***************************** */
+validate.checkUpdateData = async(req, res, next) => {
+    const {
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id,
+        inv_id
+    } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        let classificationSelect = await utilities.buildClassificationList(classification_id)
+        res.render("inventory/edit-inventory", {
+            nav,
+            title: "Update New Vehicle",
+            classificationSelect,
+            errors,
+            inv_make,
+            inv_model,
+            inv_year,
+            inv_description,
+            inv_image,
+            inv_thumbnail,
+            inv_price,
+            inv_miles,
+            inv_color,
+            classification_id,
+            inv_id
         })
         return
     }
