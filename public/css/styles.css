@@ -305,9 +305,28 @@ nav ul a:hover {
   padding-bottom: 15px;
 }
 
+#inventory-management p {
+  font-family: var(--font1);
+}
+
+#inventory-management #classificationList {
+  width: fit-content;
+}
+
+#inventory-management #inventoryDisplay {
+  font-family: var(--font1);
+  width: 400px;
+}
+
+#inventory-management #inventoryDisplay tbody tr:nth-child(odd) {
+  background-color: #f5f6f8;
+}
+
 #inventory-management .notice, #account-management .notice {
   color: red;
 }
+
+
 
 #add-classification form > div > input:invalid {
   border: .5px solid red;
