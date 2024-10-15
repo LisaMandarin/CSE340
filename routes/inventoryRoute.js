@@ -42,7 +42,17 @@ router.post(
     "/update/",
     invValidate.invRules(),
     invValidate.checkUpdateData,
-    invController.updateInventory
+    utilities.handleErrors(invController.updateInventory)
+)
+
+router.get(
+    "/delete/:inv_id",
+    utilities.handleErrors(invController.deleteInvView)
+)
+
+router.post(
+    "/delete/",
+    utilities.handleErrors(invController.deleteInventory)
 )
 
 module.exports = router;
