@@ -277,6 +277,7 @@ nav ul a:hover {
   justify-content: center;
   padding-bottom: 0;
 }
+
 .form-container form > div input[type="submit"] {
   border: 0px;
   border-radius: 50px;
@@ -285,6 +286,11 @@ nav ul a:hover {
   /* background-color: #1677FF; */
   background-color: #113be4;
   color: white;
+  cursor: pointer;
+}
+
+.form-container form > div input[type="submit"]:disabled {
+  cursor: default;
 }
 
 .sign-up {

@@ -1,4 +1,4 @@
-<div id="modify-inventory" class="form-container">
+<div id="updateForm" class="form-container">
     <h1><%= title %></h1>
 
     <%- messages() %>
@@ -53,7 +53,7 @@
             <input type="text" id="inv_color" name="inv_color" pattern="[A-Za-z\s]+" required value="<%= locals.inv_color %>">
         </div>
         <div class="submit">
-            <input type="submit" name="submit" value="Update Vehicle">
+            <input type="submit" name="submit" value="Update Vehicle" disabled>
         </div>
         <div>
             <input type="hidden" name="inv_id"
@@ -62,3 +62,5 @@
         </div>
     </form>
 </div>
+
+<script src="../../js/inv-update.js"></script>
