@@ -318,8 +318,35 @@ nav ul a:hover {
   width: 400px;
 }
 
+
 #inventory-management #inventoryDisplay tbody tr:nth-child(odd) {
   background-color: #f5f6f8;
+}
+
+#inventory-management #inventoryDisplay tbody tr:nth-child(even) {
+  background-color: white;
+}
+
+#inventory-management #inventoryDisplay td {
+  padding: 10px;
+}
+
+#inventory-management #inventoryDisplay td:nth-child(2), #inventory-management #inventoryDisplay td:nth-child(3) {
+  text-align: center;
+}
+
+#inventory-management #inventoryDisplay td:nth-child(2) a:link, #inventory-management #inventoryDisplay td:nth-child(3) a:link {
+  color: blue;
+  text-decoration: none;
+}
+
+#inventory-management #inventoryDisplay td:nth-child(2) a:visited, #inventory-management #inventoryDisplay td:nth-child(3) a:visited {
+  color: blue;
+  text-decoration: none;
+}
+
+#inventory-management #inventoryDisplay td:nth-child(2) a:hover, #inventory-management #inventoryDisplay td:nth-child(3) a:hover {
+  text-decoration: underline;
 }
 
 #inventory-management .notice, #account-management .notice {
