@@ -291,6 +291,7 @@ nav ul a:hover {
 
 .form-container form > div input[type="submit"]:disabled {
   cursor: default;
+  background-color: #c2c4c9;
 }
 
 .sign-up {

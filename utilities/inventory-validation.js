@@ -52,14 +52,12 @@ validate.invRules = () => {
         .trim()
         .escape()
         .notEmpty().withMessage("Make is required")
-        .isAlphanumeric().withMessage("Only alphabetic letters and numbers are allowed in make")
         .isLength({min: 3}).withMessage("At least 3 characters in make"),
 
         body("inv_model")
         .trim()
         .escape()
         .notEmpty().withMessage("Model is required.")
-        .isAlphanumeric().withMessage("Only alphabetic letters and numbers are allowed in model.")
         .isLength({min: 3}).withMessage("At least 3 characters in model"),
 
         body("inv_year")
