@@ -26,6 +26,7 @@ router.get(
 
 // edit account management view
 router.get('/edit-account/:account_id',
+  utilities.checkLogin,
   utilities.handleErrors(accountController.updateManagement)
  )
 
@@ -46,5 +47,13 @@ router.post(
     accountValidate.checkLoginData,
     utilities.handleErrors(accountController.accountLogin)
   )
+
+// Process update account
+router.post(
+  "/update",
+  accountValidate.updateRules(),
+  accountValidate.checkUpdateData,
+  utilities.handleErrors(accountController.updateManagement)
+)
 
 module.exports =router

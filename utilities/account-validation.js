@@ -108,4 +108,56 @@ validate.checkLoginData = async (req, res, next) => {
     next()
     }
 
+
+/*  **********************************
+*  Update Data Validation Rules
+* ********************************* */
+validate.updateRules = () => {
+    return [
+        // firstname is required and must be string
+        body("account_firstname")
+        .trim()
+        .escape()
+        .notEmpty().withMessage("First name is required.")
+        .isLength({ min: 1 }).withMessage("At least 1 character in First name"),
+
+        // lastname is required and must be string
+        body("account_lastname")
+        .trim()
+        .escape()
+        .notEmpty().withMessage("Last name is required.")
+        .isLength({ min: 2 }).withMessage("At least 2 characters in Last name"),
+
+        // valid email is required and cannot already exist in the DB
+        body("account_email")
+        .trim()
+        .escape()
+        .notEmpty().withMessage("Email is required.")
+        .isEmail().withMessage("Email format is not correct.")
+        .normalizeEmail() // refer to validator.js docs
+    ]
+    }
+
+/* ******************************
+* Check data and return errors or continue to update
+* ***************************** */
+validate.checkUpdateData = async (req, res, next) => {
+    const { account_firstname, account_lastname, account_email } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        res.render("account/edit-account", {
+            nav,
+            title: "Edit Account",
+            firstname: account_firstname,
+            lastname: account_lastname,
+            email: account_email,
+            errors,
+        })
+        return
+    }
+    next()
+    }
+
 module.exports = validate

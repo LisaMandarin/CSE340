@@ -176,9 +176,8 @@ async function accountLogout(req, res) {
  * ************************************ */
 async function updateManagement(req, res, next) {
   let nav = await utilities.getNav()
-  // const account_id = parseInt(req.params.account_id)
-  
-  res.render("./account/edit-account", {
+    
+  res.render("account/edit-account", {
     nav,
     title: "Edit Account",
     firstname: res.locals.accountData.account_firstname,

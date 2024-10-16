@@ -5,15 +5,16 @@
     
     <%- messages() %>
     
-    <% if (errors) { %>
-        <ul class="notice">
-            <% errors.array().forEach(error => { %>
-                <li><%= error.msg %></li>
-            <% }) %>
-        </ul>
-    <% } %>
     
     <form action="/account/update" method="post">
+        <% if (errors) { %>
+            <ul class="notice">
+                <% errors.array().forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+        
         <div>
             <label for="account_firstname" class="required">First Name</label><br>
             <input type="text" id="account_firstname" name="account_firstname" value="<%= firstname %>" required>
