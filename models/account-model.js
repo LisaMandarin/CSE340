@@ -28,15 +28,15 @@ async function checkExistingEmail(account_email){
 /* *****************************
 *   Login account
 * *************************** */
-async function loginAccount(account_email){
-  try {
-    const sql = "SELECT * FROM account WHERE account_email = $1"
-    const account = await pool.query(sql, [account_email])
-    return account.rows[0]
-  } catch (error) {
-    return error.message
-  }
-}
+// async function loginAccount(account_email){
+//   try {
+//     const sql = "SELECT * FROM account WHERE account_email = $1"
+//     const account = await pool.query(sql, [account_email])
+//     return account.rows[0]
+//   } catch (error) {
+//     return error.message
+//   }
+// }
 
 /* *****************************
 * Return account data using email address
@@ -52,4 +52,4 @@ async function getAccountByEmail (account_email) {
   }
 }
 
-  module.exports = {registerAccount, checkExistingEmail, loginAccount, getAccountByEmail}
+  module.exports = {registerAccount, checkExistingEmail, getAccountByEmail}

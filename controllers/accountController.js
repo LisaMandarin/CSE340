@@ -81,26 +81,26 @@ async function registerAccount(req, res) {
 /* ****************************************
 *  Process Login
 * *************************************** */
-async function loginAccount(req, res) {
-  let nav = await utilities.getNav()
-  const { account_email, account_password } = req.body
+// async function loginAccount(req, res) {
+//   let nav = await utilities.getNav()
+//   const { account_email, account_password } = req.body
   
-  const account = await accountModel.loginAccount(
-    account_email,
-  )
+//   const account = await accountModel.loginAccount(
+//     account_email,
+//   )
   
-  if (await bcrypt.compare(account_password, account.account_password)) {
-    res.status(200).send('Login successful')  
-  } else {
-    req.flash("notice", "Sorry, Invalid email or password.")
-    res.status(401).render("account/login", {
-      title: "Login",
-      nav,
-      errors: null,
-      account_email
-    })
-  }
-}
+//   if (await bcrypt.compare(account_password, account.account_password)) {
+//     res.status(200).send('Login successful')  
+//   } else {
+//     req.flash("notice", "Sorry, Invalid email or password.")
+//     res.status(401).render("account/login", {
+//       title: "Login",
+//       nav,
+//       errors: null,
+//       account_email
+//     })
+//   }
+// }
 
 /* ****************************************
  *  Process login request
@@ -109,6 +109,7 @@ async function accountLogin(req, res) {
   let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
   const accountData = await accountModel.getAccountByEmail(account_email)
+
   if (!accountData) {
    req.flash("notice", "Please check your credentials and try again.")
    res.status(400).render("account/login", {
@@ -123,6 +124,7 @@ async function accountLogin(req, res) {
    if (await bcrypt.compare(account_password, accountData.account_password)) {
    delete accountData.account_password
    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
+   
    if(process.env.NODE_ENV === 'development') {
      res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
      } else {
@@ -130,7 +132,7 @@ async function accountLogin(req, res) {
      }
     req.flash("notice", "You have logged in.")
     res.locals.account_firstname = accountData.account_firstname
-   return res.redirect("/account/")
+   res.redirect("/account/")
    } else {
     req.flash("notice", "Sorry, Invalid email or password.")
     res.status(401).render("account/login", {
@@ -141,7 +143,7 @@ async function accountLogin(req, res) {
     })
   }
   } catch (error) {
-   return new Error('Access Forbidden')
+    throw new Error('Access Forbidden')
   }
  }
 
@@ -159,4 +161,4 @@ async function buildManagement(req, res, next) {
   })
 } 
 
-module.exports = { buildLogin, buildRegister, registerAccount, loginAccount, accountLogin, buildManagement }
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement }

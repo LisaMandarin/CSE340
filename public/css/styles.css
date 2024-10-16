@@ -41,6 +41,20 @@ body {
 #tools {
   font-family: var(--font1);
 }
+
+#tools a:link {
+  text-decoration: none;
+  color: blue;
+}
+
+#tools a:visited {
+  color: blue;
+}
+
+#tools a:hover {
+  color: white;
+  background-color: black;
+}
 /* -----end of header styles------ */
 
 /* -----navigation styles------ */
