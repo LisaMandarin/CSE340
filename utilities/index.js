@@ -147,4 +147,17 @@ Util.checkLogin = (req, res, next) => {
   }
  }
 
+/* ****************************************
+ *  Check Admin or Employee
+ * ************************************ */
+Util.checkAuthZ = (req, res, next) => {
+  const userType = res.locals.accountData.account_type
+  next()
+  if (userType === 'Admin' || userType === 'Employee') {
+    next()
+  } else {
+    req.flash("notice", "It seems like you don't have permission to access.")
+    return res.redirect("/account/login")
+  }
+}
 module.exports = Util

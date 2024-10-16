@@ -18,7 +18,10 @@ router.get("/detail/:invId", utilities.handleErrors(invController.buildByInvento
 router.get("/error", utilities.handleErrors(invController.buildError));
 
 // Route to build inventory management view
-router.get("/", utilities.handleErrors(invController.buildManagement));
+router.get("/",
+    utilities.checkLogin, 
+    utilities.checkAuthZ,
+    utilities.handleErrors(invController.buildManagement));
 
 // Route to build add-inventory view
 router.get("/add-classification", utilities.handleErrors(invController.buildAddView));

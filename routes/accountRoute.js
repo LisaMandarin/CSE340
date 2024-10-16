@@ -18,6 +18,12 @@ router.get('/',
   utilities.checkLogin,
   utilities.handleErrors(accountController.buildManagement))
 
+// process logout  
+router.get(
+  "/logout",
+  utilities.handleErrors(accountController.accountLogout)
+)
+
 /* *************
 * Process view
 ************* */
@@ -36,9 +42,4 @@ router.post(
     utilities.handleErrors(accountController.accountLogin)
   )
 
-// Process logout
-router.get(
-  "/logout",
-  utilities.handleErrors(accountController.accountLogout)
-)
 module.exports =router
