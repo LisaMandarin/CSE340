@@ -24,6 +24,11 @@ router.get(
   utilities.handleErrors(accountController.accountLogout)
 )
 
+// edit account management view
+router.get('/edit-account/:account_id',
+  utilities.handleErrors(accountController.updateManagement)
+ )
+
 /* *************
 * Process view
 ************* */

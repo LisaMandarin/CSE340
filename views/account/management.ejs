@@ -3,7 +3,7 @@
         <h1><%= title %></h1>
     <% } %>
 
-    <h3>Welcome <%= locals.account_firstname %></h3>
+    <h2>Welcome <%= locals.account_firstname %></h2>
     
     <%- messages() %>
     
@@ -15,7 +15,7 @@
         </ul>
     <% } %>
 
-    <div><a href="/account/edit-account">Edit Account Information</a></div>
+    <%- link %>
 
     <% if (locals.accountData.account_type === "Employee" || locals.accountData.account_type === "Admin") { %>
         <div class="inv-management-container">
@@ -24,4 +24,3 @@
         </div>
     <% } %>
 </div>
-

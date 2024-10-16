@@ -152,12 +152,14 @@ async function accountLogin(req, res) {
  * ************************************ */
 async function buildManagement(req, res, next) {
   let nav = await utilities.getNav()
+  let link = await utilities.buildAccountLink(res.locals.accountData)
 
   res.render("account/management", {
     nav,
     title: "Account Management",
     errors: null,
-    account_firstname: res.locals.accountData.account_firstname
+    account_firstname: res.locals.accountData.account_firstname,
+    link
   })
 } 
 
@@ -169,5 +171,23 @@ async function accountLogout(req, res) {
   res.redirect("/")
 }
 
+ /* ****************************************
+ *  Build update management view
+ * ************************************ */
+async function updateManagement(req, res, next) {
+  let nav = await utilities.getNav()
+  // const account_id = parseInt(req.params.account_id)
+  
+  res.render("./account/edit-account", {
+    nav,
+    title: "Edit Account",
+    firstname: res.locals.accountData.account_firstname,
+    lastname: res.locals.accountData.account_lastname,
+    email: res.locals.accountData.account_email,
+    errors: null
+  })
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, accountLogout }
+}
+
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, accountLogout, updateManagement }

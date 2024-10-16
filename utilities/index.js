@@ -160,4 +160,27 @@ Util.checkAuthZ = (req, res, next) => {
     return res.redirect("/account/login")
   }
 }
+
+/* **************************************
+* Build the link HTML in edit-account
+* ************************************ */
+Util.buildAccountLink = async function(data) {
+  let content
+
+  if (data) {
+    content = `
+      <div id="edit-account">
+        <a href="/account/edit-account/${data.account_id}">
+          Edit Account Information
+        </a>
+      </div>
+    `
+  } else {
+    content = "<div id='edit-account'>Edit Account Information</div>"
+    throw new Error("Link to edit account is invalid.")
+  }
+
+  return content 
+}
+
 module.exports = Util
