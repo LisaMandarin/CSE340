@@ -386,7 +386,7 @@ nav ul a:hover {
   color: red;
 }
 
-#account-management p {
+#account-management div {
   font-family: var(--font1);
 }
 

@@ -15,7 +15,13 @@
         </ul>
     <% } %>
 
-    <p><a href="/account/edit-account">Edit Account Information</a></p>
-    
+    <div><a href="/account/edit-account">Edit Account Information</a></div>
+
+    <% if (locals.accountData.account_type === "Employee" || locals.accountData.account_type === "Admin") { %>
+        <div class="inv-management-container">
+            <h3>Inventory Management</h3>
+            <div><a href="/inv">Manage Inventory</a></div>
+        </div>
+    <% } %>
 </div>
 
