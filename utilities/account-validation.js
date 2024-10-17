@@ -142,7 +142,7 @@ validate.updateRules = () => {
 * Check data and return errors or continue to update
 * ***************************** */
 validate.checkUpdateData = async (req, res, next) => {
-    const { account_firstname, account_lastname, account_email } = req.body
+    const { account_firstname, account_lastname, account_email, account_id } = req.body
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
@@ -153,6 +153,7 @@ validate.checkUpdateData = async (req, res, next) => {
             firstname: account_firstname,
             lastname: account_lastname,
             email: account_email,
+            account_id: account_id,
             errors,
         })
         return

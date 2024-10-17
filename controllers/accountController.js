@@ -172,9 +172,9 @@ async function accountLogout(req, res) {
 }
 
  /* ****************************************
- *  Build update management view
+ *  Build update account view
  * ************************************ */
-async function updateManagement(req, res, next) {
+async function buildUpdateView(req, res, next) {
   let nav = await utilities.getNav()
     
   res.render("account/edit-account", {
@@ -183,10 +183,45 @@ async function updateManagement(req, res, next) {
     firstname: res.locals.accountData.account_firstname,
     lastname: res.locals.accountData.account_lastname,
     email: res.locals.accountData.account_email,
+    account_id: res.locals.accountData.account_id,
     errors: null
   })
 
 }
 
+/* ***************************
+ *  Update Account
+ * ************************** */
+async function updateAccount(req, res, next) {
+  const { account_firstname, account_lastname, account_email, account_id } = req.body
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, accountLogout, updateManagement }
+  let updateResult = await accountModel.updateAccount(account_firstname, account_lastname, account_email, account_id)
+  
+  if (updateResult) {
+    const newAccountData = await accountModel.getAccountById(account_id)
+
+    if (!newAccountData) {
+      req.flash("notice", "Retrieving new account data failed.")
+      return res.redirect("/account/login")
+    }
+    
+  delete newAccountData.account_password
+  const accessToken = jwt.sign(newAccountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600})
+
+  if (process.env.NODE_ENV === 'development') {
+    res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000})
+  } else {
+    res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000, secure: true})
+  }
+  
+  req.flash("notice", "Congratulations, your information has been updated.")
+  res.redirect("/account/")
+
+  } else {
+    req.flash("notice", "Sorry, the update failed")
+    res.redirect(`/account/edit-account/${account_id}`)
+  }
+}
+
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, accountLogout, buildUpdateView, updateAccount }

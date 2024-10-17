@@ -152,7 +152,7 @@ Util.checkLogin = (req, res, next) => {
  * ************************************ */
 Util.checkAuthZ = (req, res, next) => {
   const userType = res.locals.accountData.account_type
-  next()
+  
   if (userType === 'Admin' || userType === 'Employee') {
     next()
   } else {
