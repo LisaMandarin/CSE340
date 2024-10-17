@@ -312,8 +312,18 @@ nav ul a:hover {
   text-align: center;
 }
 
+#messages ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.notice-success {
+  color: white;
+  background-color: #0db500;
+}
 .form-container .notice {
-  color: red;
+  color: white;
+  background-color: #b50000;
 }
 
 .form-container .notice li {
@@ -371,7 +381,8 @@ nav ul a:hover {
 }
 
 #inventory-management .notice, #account-management .notice {
-  color: red;
+  color: white;
+  background-color: #b50000;
 }
 
 

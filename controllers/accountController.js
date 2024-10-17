@@ -59,7 +59,7 @@ async function registerAccount(req, res) {
   
   if (regResult) {
     req.flash(
-      "notice",
+      "notice-success",
       `Congratulations, you\'re registered ${account_firstname}. Please log in.`
     )
     
@@ -190,7 +190,7 @@ async function updateAccount(req, res, next) {
     res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000, secure: true})
   }
   
-  req.flash("notice", "Congratulations, your information has been updated.")
+  req.flash("notice-success", "Congratulations, your information has been updated.")
   res.redirect("/account/")
 
   } else {
@@ -200,7 +200,7 @@ async function updateAccount(req, res, next) {
 }
 
 /* ***************************
- *  Update Account
+ *  Update Password
  * ************************** */
 async function updatePassword(req, res, next) {
   const { account_password, account_id } = req.body
@@ -215,7 +215,7 @@ async function updatePassword(req, res, next) {
   let updateResult = await accountModel.updatePassword(hashedPassword, account_id)
 
   if (updateResult) {
-    req.flash("notice", "Congratulations, your password has been updated.") 
+    req.flash("notice-success", "Congratulations, your password has been updated.") 
     res.redirect("/account/")
   } else {
     req.flash("notice", "Sorry, the password update failed")

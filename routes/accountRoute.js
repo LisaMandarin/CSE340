@@ -59,6 +59,8 @@ router.post(
 // Process update password
 router.post(
   "/updatePW",
+  accountValidate.updatePWRules(),
+  accountValidate.checkUpdatePWData,
   utilities.handleErrors(accountController.updatePassword)
 )
 

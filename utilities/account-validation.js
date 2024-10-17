@@ -108,7 +108,6 @@ validate.checkLoginData = async (req, res, next) => {
     next()
     }
 
-
 /*  **********************************
 *  Update Data Validation Rules
 * ********************************* */
@@ -157,6 +156,42 @@ validate.checkUpdateData = async (req, res, next) => {
             errors,
         })
         return
+    }
+    next()
+    }
+
+/*  **********************************
+*  Update Password Validation Rules
+* ********************************* */
+validate.updatePWRules = () => {
+    return [
+        body("account_password")
+        .trim()
+        .notEmpty().withMessage("Password can't be empty.")
+        .isStrongPassword({
+            minLength: 12,
+            minLowercase: 1,
+            minUppercase: 1,
+            minNumbers: 1,
+            minSymbols: 1,
+        })
+        .withMessage("Password does not meet requirements."),
+    ]
+    }
+
+/* ******************************
+* Check password and return errors or continue to update
+* ***************************** */
+validate.checkUpdatePWData = async (req, res, next) => {
+    const { account_password, account_id } = req.body
+    let pwErrors = []
+    pwErrors = validationResult(req)
+    if (!pwErrors.isEmpty()) {
+        let nav = await utilities.getNav()
+        errorMSG = pwErrors.array().map(error => `
+            <li>${error.msg}</li>`).join('')
+        req.flash("pw-notice", `<ul class="notice" style='width: 400px; margin: auto;'>${errorMSG}</ul>`)    
+        return res.redirect(`/account/edit-account/${account_id}`)
     }
     next()
     }
