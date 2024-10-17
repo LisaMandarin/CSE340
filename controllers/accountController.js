@@ -106,7 +106,7 @@ async function accountLogin(req, res) {
      } else {
        res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
      }
-    req.flash("notice", "You have logged in.")
+    req.flash("notice-success", "You have logged in.")
     res.locals.account_firstname = accountData.account_firstname
    res.redirect("/account/")
    } else {
