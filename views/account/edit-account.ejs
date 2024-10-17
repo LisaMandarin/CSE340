@@ -1,19 +1,19 @@
-<div class="form-container">
+<div class="form-container" id="edit-account">
     <% if (title) { %>
         <h1><%= title %></h1>
     <% } %>
     
     <%- messages() %>
     
+    <% if (errors) { %>
+        <ul class="notice" style="width: 400px;">
+            <% errors.array().forEach(error => { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
     
     <form action="/account/update" method="post">
-        <% if (errors) { %>
-            <ul class="notice">
-                <% errors.array().forEach(error => { %>
-                    <li><%= error.msg %></li>
-                <% }) %>
-            </ul>
-        <% } %>
         
         <div>
             <label for="account_firstname" class="required">First Name</label><br>
@@ -36,6 +36,35 @@
                 value="<%= account_id %>"
             <% } %>>
         </div>
+    </form>
 
+    <h2>Update Password</h2>
+    <form action="/account/updatePW" method="post">
+        <div class="form-hint">Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter, 1 lowercase letter, and 1 special character.</div>
+        <div class="form-hint">*note your original password will be changed.</div>
+        <div>
+            <label for="account_password">Password</label><br>
+            <input type="password" id="account_password" name="account_password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" placeholder="Enter your new password" required>
+            <button type="button" id="toggleShowPW">Show Password</button>
+        </div>
+        <div class="submit">
+            <input type="submit" value="Change Password">
+        </div>
     </form>
 </div>
+
+<script>
+    const toggleShowPW = document.getElementById("toggleShowPW")
+    toggleShowPW.addEventListener("click", () => {
+        const pwInput = document.getElementById("account_password")
+        const type = pwInput.getAttribute('type')
+
+        if (type === 'password') {
+            pwInput.setAttribute('type', 'text')
+            toggleShowPW.innerHTML = "Hide Password"
+        } else {
+            pwInput.setAttribute('type', 'password')
+            toggleShowPW.innerHTML = "Show Password"
+        }
+    })
+</script>

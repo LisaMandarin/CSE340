@@ -390,6 +390,10 @@ nav ul a:hover {
   font-family: var(--font1);
 }
 
+#edit-account h2 {
+  text-align: center;
+}
+
 
 /* -----end of body styles----- */
 
