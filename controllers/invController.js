@@ -126,7 +126,7 @@ invCont.addInventory = async function(req, res, next) {
   let classificationSelect = await utilities.buildClassificationList(classification_id)
   
   if (addResult) {
-    req.flash("notice", `${vehicle} has been added to the inventory`)
+    req.flash("notice-success", `${vehicle} has been added to the inventory`)
     res.redirect('/inv')
   } else {
     req.flash("notice", "Adding vehicle failed")
@@ -206,7 +206,7 @@ invCont.updateInventory = async function(req, res, next) {
   
   if (updateResult) {
     const vehicle = `${updateResult.inv_make} ${updateResult.inv_model}`
-    req.flash("notice", `${vehicle} was successfully updated.`)
+    req.flash("notice-success", `${vehicle} was successfully updated.`)
     res.redirect("/inv/")
   } else {
     const vehicle = `${inv_make} ${inv_model}`
@@ -265,7 +265,7 @@ invCont.deleteInventory = async function(req, res, next) {
   let deleteResult = await invModel.deleteInventory(inv_id)
   
   if (deleteResult) {
-    req.flash("notice", `${vehicle} was deleted`)
+    req.flash("notice-success", `${vehicle} was deleted`)
     res.redirect("/inv/")
   } else {
     req.flash("notice", "Sorry, the delete failed.")
