@@ -79,30 +79,6 @@ async function registerAccount(req, res) {
 }
 
 /* ****************************************
-*  Process Login
-* *************************************** */
-// async function loginAccount(req, res) {
-//   let nav = await utilities.getNav()
-//   const { account_email, account_password } = req.body
-  
-//   const account = await accountModel.loginAccount(
-//     account_email,
-//   )
-  
-//   if (await bcrypt.compare(account_password, account.account_password)) {
-//     res.status(200).send('Login successful')  
-//   } else {
-//     req.flash("notice", "Sorry, Invalid email or password.")
-//     res.status(401).render("account/login", {
-//       title: "Login",
-//       nav,
-//       errors: null,
-//       account_email
-//     })
-//   }
-// }
-
-/* ****************************************
  *  Process login request
  * ************************************ */
 async function accountLogin(req, res) {
@@ -223,5 +199,29 @@ async function updateAccount(req, res, next) {
   }
 }
 
+/* ***************************
+ *  Update Account
+ * ************************** */
+async function updatePassword(req, res, next) {
+  const { account_password, account_id } = req.body
+  let hashedPassword
+  try {
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+    req.flash("notice", "Sorry, there was an error processing the password update.")
+    res.redirect(`/account/edit-account/${account_id}`)
+  }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, accountLogout, buildUpdateView, updateAccount }
+  let updateResult = await accountModel.updatePassword(hashedPassword, account_id)
+
+  if (updateResult) {
+    req.flash("notice", "Congratulations, your password has been updated.") 
+    res.redirect("/account/")
+  } else {
+    req.flash("notice", "Sorry, the password update failed")
+    res.redirect(`/account/edit-account/${account_id}`)
+  }
+}
+
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, accountLogout, buildUpdateView, updateAccount, updatePassword }

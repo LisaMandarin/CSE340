@@ -56,4 +56,10 @@ router.post(
   utilities.handleErrors(accountController.updateAccount)
 )
 
+// Process update password
+router.post(
+  "/updatePW",
+  utilities.handleErrors(accountController.updatePassword)
+)
+
 module.exports =router

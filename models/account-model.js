@@ -26,19 +26,6 @@ async function checkExistingEmail(account_email){
 }
 
 /* *****************************
-*   Login account
-* *************************** */
-// async function loginAccount(account_email){
-//   try {
-//     const sql = "SELECT * FROM account WHERE account_email = $1"
-//     const account = await pool.query(sql, [account_email])
-//     return account.rows[0]
-//   } catch (error) {
-//     return error.message
-//   }
-// }
-
-/* *****************************
 * Return account data using email address
 * ***************************** */
 async function getAccountByEmail (account_email) {
@@ -66,6 +53,9 @@ async function updateAccount(account_firstname, account_lastname, account_email,
   }
 }
 
+/* *****************************
+* Return account data using account_id
+* ***************************** */
 async function getAccountById(account_id) {
   try {
     const sql = "SELECT * FROM account WHERE account_id = $1"
@@ -77,4 +67,18 @@ async function getAccountById(account_id) {
   }
 }
 
-  module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, getAccountById}
+
+/* *****************************
+* Update Password
+* ***************************** */
+async function  updatePassword(hashedPassword, account_id) {
+  try {
+    const sql = "UPDATE account SET account_password = $1 WHERE account_id = $2"
+    const updateResult = await pool.query(sql, [hashedPassword, account_id])
+    return updateResult.rowCount
+  } catch (error) {
+    throw error
+  }
+}
+
+  module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, getAccountById, updatePassword}
