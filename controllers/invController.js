@@ -80,7 +80,7 @@ invCont.addClassification = async function (req, res, next) {
   
   if (addResult) {
     req.flash(
-      "notice",
+      "notice-success",
       `You have added a new classification ${classification_name}`
     )
 
