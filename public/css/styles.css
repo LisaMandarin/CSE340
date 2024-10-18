@@ -410,9 +410,14 @@ nav ul a:hover {
 }
 
 #edit-account .danger-zone {
-  border: 1px solid red;
+  border: 1px solid #b50000;
   width: fit-content; 
   margin: auto;
+}
+
+#edit-account .danger-hint {
+  background-color: #b50000;
+  color: white;
 }
 
 
