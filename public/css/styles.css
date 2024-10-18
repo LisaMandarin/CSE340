@@ -428,6 +428,19 @@ nav ul a:hover {
   color: white;
 }
 
+#message-management table {
+  width: fit-content;
+  margin: auto;
+}
+
+#message-management table th {
+  font-weight: bolder;
+}
+
+#message-management table tbody tr:nth-child(even) {
+  background-color: #c2c4c9;
+}
+
 #add-message .reminder {
   width: 400px;
   margin: auto;
@@ -497,6 +510,10 @@ footer p {
   }
   .hero-car {
     max-width: 500px;
+    width: 90%;
+  }
+
+  #message-management table {
     width: 90%;
   }
 

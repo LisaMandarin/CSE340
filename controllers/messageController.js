@@ -14,4 +14,18 @@ async function addMessage(req, res, next) {
     })
 }
 
-module.exports = { addMessage }
+/* ****************************************
+*  Deliver message management view
+* *************************************** */
+async function buildManagement(req, res, next) {
+    let nav = await utilities.getNav()
+    const name = `${res.locals.accountData.account_firstname} ${res.locals.accountData.account_lastname}`
+    res.render("message/management", {
+        nav,
+        title: `${name} Inbox`,
+        errors: null
+    })
+}
+
+
+module.exports = { addMessage, buildManagement }

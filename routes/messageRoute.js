@@ -11,4 +11,13 @@ router.get("/add-message",
     utilities.handleErrors(msgController.addMessage)
 )
 
+/* ****************************
+* Build message management View
+**************************** */
+router.get("/",
+    utilities.checkLogin,
+    utilities.handleErrors(msgController.buildManagement)
+)
+
+
 module.exports = router
