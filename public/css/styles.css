@@ -420,6 +420,16 @@ nav ul a:hover {
   color: white;
 }
 
+#add-message .reminder {
+  width: 400px;
+  margin: auto;
+}
+
+#add-message select {
+  font-size: 1rem;
+  width: 100%;
+}
+
 
 /* -----end of body styles----- */
 

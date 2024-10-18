@@ -94,5 +94,17 @@ async function deleteAccountByEmailId(account_email, account_id) {
   }
 }
 
+/* *****************************
+* Select all accounts
+* ***************************** */
+async function getALLAccounts() {
+  try {
+    const sql = `SELECT * FROM account ORDER BY account_id ASC `
+    const result = await pool.query(sql)
+    return result.rows
+  } catch (error) {
+    throw new Error("Failed to retrieve accounts")
+  }
+}
 
-  module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, getAccountById, updatePassword, deleteAccountByEmailId }
+  module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, getAccountById, updatePassword, deleteAccountByEmailId, getALLAccounts }

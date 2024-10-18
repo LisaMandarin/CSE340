@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const accountModel = require("../models/account-model")
 const Util = {}
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -182,5 +183,26 @@ Util.buildAccountLink = async function(data) {
 
   return content 
 }
+
+/* ************************
+ * Build recipient list
+ ************************** */
+Util.recipientListSelect = async function(message_to) {
+  let data = await accountModel.getALLAccounts()
+  let recipientList = `
+    <select name="message_to" id="message_to" required>
+      <option value="">Select a recipient</option>
+      ${data.map(d => 
+        `<option value="${d.account_id}"
+          ${message_to !=null && d.account_id == message_to ? 'selected' : ''}
+        >
+          ${d.account_firstname} ${d.account_lastname}
+        </option>`
+      ).join('')}
+    </select>
+  `
+  return recipientList
+}
+
 
 module.exports = Util

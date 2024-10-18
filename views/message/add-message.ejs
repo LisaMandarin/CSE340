@@ -1,0 +1,31 @@
+<div id="add-message" class="form-container">
+    <h1><%= title %></h1>
+    <div class="reminder">This is an internal system only.  Recipients are limited to the three generic accounts.</div>
+
+    <%- messages() %>
+
+    <form action="/message/add-message" method="post">
+        <% if (errors) { %>
+            <ul class="notice">
+                <% errors.arrays().forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+        <div>
+            <label for="message_to">To</label><br>
+            <%- recipientListSelect %>
+        </div>
+        <div>
+            <label for="message_subject">Subject</label><br>
+            <input type="text" id="message_subject" name="message_subject" required value="<%= locals.message_subject %>">
+        </div>
+        <div>
+            <label for="message_body">Message</label><br>
+            <textarea id="message_body" name="message_body" rows="5" placeholder="Start your message here..." required><%= locals.message_body %></textarea>
+        </div>
+        <div class="submit">
+            <input type="submit" value="Send">
+        </div>
+    </form>
+</div>
