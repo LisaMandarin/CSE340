@@ -7,6 +7,7 @@ const msgController = require("../controllers/messageController")
 * Build add message View
 *********************** */
 router.get("/add-message",
+    utilities.checkLogin,
     utilities.handleErrors(msgController.addMessage)
 )
 
