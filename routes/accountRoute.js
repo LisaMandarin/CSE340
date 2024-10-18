@@ -64,4 +64,10 @@ router.post(
   utilities.handleErrors(accountController.updatePassword)
 )
 
+// Process delete account
+router.post(
+  '/deleteAccount',
+  utilities.handleErrors(accountController.deleteAccount)
+)
+
 module.exports =router

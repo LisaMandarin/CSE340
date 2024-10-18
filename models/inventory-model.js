@@ -106,9 +106,7 @@ async function updateInventory(
 }
 
 
-async function deleteInventory(
-  inv_id
-) {
+async function deleteInventory(inv_id) {
   try {
     const sql = 
       "DELETE FROM inventory WHERE inv_id = $1"

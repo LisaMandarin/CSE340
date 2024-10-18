@@ -223,5 +223,47 @@ async function updatePassword(req, res, next) {
   }
 }
 
+/* ***************************
+ *  Delete account
+ * ************************** */
+async function deleteAccount(req, res) {
+  let nav = await utilities.getNav()
+  const { account_email, account_password, account_id } = req.body
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, accountLogout, buildUpdateView, updateAccount, updatePassword }
+  try {
+    const accountData = await accountModel.getAccountByEmail(account_email)
+    if (!accountData) {
+      req.flash('notice', 'Failed to delete the current account.  Check your credentials')
+      res.render("account/edit-account", {
+        nav,
+        title: "Edit Account",
+        firstname: res.locals.accountData.account_firstname,
+        lastname: res.locals.accountData.account_lastname,
+        email: res.locals.accountData.account_email,
+        account_id: res.locals.accountData.account_id,
+        errors: null
+      })
+    };
+
+    const pwMatch = await bcrypt.compare(account_password, accountData.account_password)
+    if (!pwMatch) {
+      req.flash("notice", "Failed to delete the current account.  Check your credentials.")
+      return res.redirect(`/account/edit-account/${account_id}`)
+    }
+
+    const deleteResult = await accountModel.deleteAccountByEmailId(account_email, account_id)
+    if (deleteResult) {
+      res.clearCookie("jwt");
+      req.flash("notice-success", "You have successfully deleted the account.")
+      return res.redirect("/")
+    } 
+    
+  } catch (error) {
+    console.error(error);
+    req.flash("notice", "Delete account process failed.  Check your credentials.")
+    return res.redirect(`/account/edit-account/${account_id}`)
+  }  
+}
+
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement, accountLogout, buildUpdateView, updateAccount, updatePassword, deleteAccount }
