@@ -71,7 +71,7 @@ async function getAccountById(account_id) {
 /* *****************************
 * Update Password
 * ***************************** */
-async function  updatePassword(hashedPassword, account_id) {
+async function updatePassword(hashedPassword, account_id) {
   try {
     const sql = "UPDATE account SET account_password = $1 WHERE account_id = $2"
     const updateResult = await pool.query(sql, [hashedPassword, account_id])
@@ -80,5 +80,17 @@ async function  updatePassword(hashedPassword, account_id) {
     throw error
   }
 }
+
+/* *****************************
+* Delete Account by id and email 
+* ***************************** */
+async function deleteAccount(account_email, hashedPassword) {
+  try {
+    const sql = "DELETE FROM account WHERE "
+  } catch (error) {
+    throw error
+  }
+}
+
 
   module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, getAccountById, updatePassword}
