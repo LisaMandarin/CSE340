@@ -13,15 +13,15 @@
             </ul>
         <% } %>
         <div>
-            <label for="message_to">To</label><br>
+            <label for="message_to" class="required">To</label><br>
             <%- recipientListSelect %>
         </div>
         <div>
-            <label for="message_subject">Subject</label><br>
-            <input type="text" id="message_subject" name="message_subject" required value="<%= locals.message_subject %>">
+            <label for="message_subject" class="required">Subject</label><br>
+            <input type="text" id="message_subject" name="message_subject" placeholder="Enter subject" required value="<%= locals.message_subject %>">
         </div>
         <div>
-            <label for="message_body">Message</label><br>
+            <label for="message_body" class="required">Message</label><br>
             <textarea id="message_body" name="message_body" rows="5" placeholder="Start your message here..." required><%= locals.message_body %></textarea>
         </div>
         <div class="submit">
