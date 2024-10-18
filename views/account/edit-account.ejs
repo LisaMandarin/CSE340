@@ -57,6 +57,27 @@
             <% } %>>
         </div>
     </form>
+    <hr>
+    <div class="danger-zone">
+        <h2 style="color: red;">Delete Current Account</h2>
+        <form action="/account/deleteAccount" method="post">
+            <div class="form-hint">⚠️Once you delete your current account, there is no way to undo it.</div>
+            <div class="form-hint">Type your email address to ensure your want to delete the current account.</div>
+            <div>
+                <label for="account_email" class="required">Email</label><br>
+                <input type="email" id="account_email" name="account_email" placeholder="Enter your email" required>
+            </div>
+            <div class="submit">
+                <input type="submit" value="Delete Account" style="background-color: red;">
+            </div>
+            <div>
+                <input type="hidden" name="account_id"
+                <% if (locals.account_id) { %>
+                    value="<%= account_id %>"
+                <% } %>>
+            </div>
+        </form>
+    </div>
 </div>
 
 <script>

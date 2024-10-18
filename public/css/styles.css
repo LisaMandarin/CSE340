@@ -405,6 +405,16 @@ nav ul a:hover {
   text-align: center;
 }
 
+#edit-account hr {
+  margin: 2rem;
+}
+
+#edit-account .danger-zone {
+  border: 1px solid red;
+  width: fit-content; 
+  margin: auto;
+}
+
 
 /* -----end of body styles----- */
 
