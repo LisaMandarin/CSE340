@@ -224,7 +224,7 @@ Util.getMsgTable = async function(message_to) {
       `<tr>
         <td>${d.message_created}</td>
         <td>${d.message_subject}</td>
-        <td>${d.message_from}</td>
+        <td>${d.sender_name}</td>
         <td>${d.message_read}</td>
       </tr>`
     ).join("")

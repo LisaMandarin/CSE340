@@ -431,6 +431,8 @@ nav ul a:hover {
 #message-management table {
   width: fit-content;
   margin: auto;
+  font-family: var(--font1);
+  font-size: .5rem;
 }
 
 #message-management table th {
@@ -443,6 +445,7 @@ nav ul a:hover {
 
 #message-management table td {
   width: fit-content;
+  padding: 5px;
 }
 
 #add-message .reminder {
@@ -519,6 +522,7 @@ footer p {
 
   #message-management table {
     width: 90%;
+    font-size: 1rem;
   }
 
 }
