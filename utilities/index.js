@@ -187,8 +187,8 @@ Util.buildAccountLink = async function(data) {
 /* ************************
  * Build recipient list
  ************************** */
-Util.recipientListSelect = async function(message_to) {
-  let data = await accountModel.getALLAccounts()
+Util.recipientListSelect = async function(message_from, message_to) {
+  let data = await accountModel.getALLAccounts(message_from)
   let recipientList = `
     <select name="message_to" id="message_to" required>
       <option value="">Select a recipient</option>

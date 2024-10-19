@@ -95,12 +95,12 @@ async function deleteAccountByEmailId(account_email, account_id) {
 }
 
 /* *****************************
-* Select all accounts
+* Select all accounts EXCEPT a certain account
 * ***************************** */
-async function getALLAccounts() {
+async function getALLAccounts(account_id) {
   try {
-    const sql = `SELECT * FROM account ORDER BY account_id ASC `
-    const result = await pool.query(sql)
+    const sql = `SELECT * FROM account WHERE account_id != $1 ORDER BY account_id ASC `
+    const result = await pool.query(sql, [account_id])
     return result.rows
   } catch (error) {
     throw new Error("Failed to retrieve accounts")
