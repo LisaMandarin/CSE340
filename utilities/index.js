@@ -213,4 +213,27 @@ Util.getMsgNum = async function(message_to) {
   return data.length
 }
 
+/* ************************
+ * Retrieve message table by account
+ ************************** */
+Util.getMsgTable = async function(message_to) {
+  const data = await msgModel.getMessagesByMessage_to(message_to)
+  if (data && data.length > 0) {
+    let msgContent = 
+    data.map(d => 
+      `<tr>
+        <td>${d.message_created}</td>
+        <td>${d.message_subject}</td>
+        <td>${d.message_from}</td>
+        <td>${d.message_read}</td>
+      </tr>`
+    ).join("")
+    
+    return msgContent
+  } else {
+    console.error("Failed to retrieve messages")
+    return
+  }
+}
+
 module.exports = Util

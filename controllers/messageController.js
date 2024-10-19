@@ -25,10 +25,13 @@ async function buildAddMessage(req, res, next) {
 async function buildManagement(req, res, next) {
     let nav = await utilities.getNav()
     const name = `${res.locals.accountData.account_firstname} ${res.locals.accountData.account_lastname}`
+    let msgTable = await utilities.getMsgTable(res.locals.accountData.account_id)
+    console.log(msgTable)
     res.render("message/management", {
         nav,
         title: `${name} Inbox`,
-        errors: null
+        errors: null,
+        msgTable,
     })
 }
 

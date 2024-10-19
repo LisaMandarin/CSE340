@@ -441,6 +441,10 @@ nav ul a:hover {
   background-color: #c2c4c9;
 }
 
+#message-management table td {
+  width: fit-content;
+}
+
 #add-message .reminder {
   width: 400px;
   margin: auto;
