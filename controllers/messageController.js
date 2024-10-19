@@ -14,6 +14,7 @@ async function buildAddMessage(req, res, next) {
         title: "New Message",
         errors: null,
         recipientListSelect,
+        account_id: res.locals.accountData.account_id
     })
 }
 
@@ -35,9 +36,10 @@ async function buildManagement(req, res, next) {
 * *************************************** */
 async function addMessage(req, res) {
     let nav = await utilities.getNav()
-    const { message_to, message_subject, message_body, account_id, message_created } = req.body
+    const { message_from, message_to, message_subject, message_body, message_created } = req.body
+    let recipientListSelect = await utilities.recipientListSelect(message_to)
     try {
-        const result = await msgModel.addMessage(account_id, message_to, message_subject, message_body, message_created)
+        const result = await msgModel.addMessage(message_from, message_to, message_subject, message_body, message_created)
         if (!result) {
             req.flash("notice", "Adding message process failed")
             res.render("message/add-message", {
@@ -45,16 +47,28 @@ async function addMessage(req, res) {
                 title: "New Message",
                 errors: null,
                 recipientListSelect,
+                message_from,
                 message_to,
                 message_subject,
                 message_body,
-                account_id,
-                message_created
+                message_created,
             })
         }
-        return result.rowCount
+        req.flash("notice-success", "Message sent successfully")
+        res.redirect("/message")
     } catch (error) {
-
+        req.flash("notice", "Failed to send message.  Please try again.")
+        res.render("message/add-message", {
+            nav,
+            title: "New Message",
+            errors: null,
+            recipientListSelect,
+            message_from,
+            message_to,
+            message_subject,
+            message_body,
+            message_created,
+        })
     }
 }
 
