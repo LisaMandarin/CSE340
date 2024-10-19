@@ -7,7 +7,7 @@
     <form action="/message/add-message" method="post" id="msgForm">
         <% if (errors) { %>
             <ul class="notice">
-                <% errors.arrays().forEach(error => { %>
+                <% errors.array().forEach(error => { %>
                     <li><%= error.msg %></li>
                 <% }) %>
             </ul>
@@ -30,7 +30,7 @@
         <div>
             <input type="hidden" name="message_from" 
                 <% if (locals.account_id) { %>
-                    value="<%= locals.account_id %>"
+                    value="<%= locals.account_id%>"
                 <% } %>
             >
             <input type="hidden" id="message_created" name="message_created">

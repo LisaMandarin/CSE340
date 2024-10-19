@@ -2,6 +2,7 @@ const express = require("express")
 const router = new express.Router()
 const utilities = require("../utilities")
 const msgController = require("../controllers/messageController")
+const msgValidate = require("../utilities/message_validation")
 
 /* ***********************
 * Build add message View
@@ -24,6 +25,8 @@ router.get("/",
 **************************** */
 router.post("/add-message", 
     utilities.checkLogin,
+    msgValidate.addMsgRules(),
+    msgValidate.checkAddMsg,
     utilities.handleErrors(msgController.addMessage)
 )
 
