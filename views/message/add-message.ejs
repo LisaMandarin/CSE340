@@ -4,7 +4,7 @@
 
     <%- messages() %>
 
-    <form action="/message/add-message" method="post">
+    <form action="/message/add-message" method="post" id="msgForm">
         <% if (errors) { %>
             <ul class="notice">
                 <% errors.arrays().forEach(error => { %>
@@ -27,5 +27,22 @@
         <div class="submit">
             <input type="submit" value="Send">
         </div>
+        <div>
+            <input type="hidden" name="message_from" 
+                <% if (locals.account_id) { %>
+                    value="<%= locals.account_id %>"
+                <% } %>
+            >
+            <input type="hidden" id="message_created" name="message_created">
+        </div>
     </form>
 </div>
+
+<script>
+    const msgForm = document.getElementById("msgForm")
+    msgForm.addEventListener("submit", () => {
+        const now = new Date().toISOString();
+        const messageCreated = document.getElementById("message_created")
+        messageCreated.value = now
+    })
+</script>

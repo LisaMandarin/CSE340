@@ -8,7 +8,7 @@ const msgController = require("../controllers/messageController")
 *********************** */
 router.get("/add-message",
     utilities.checkLogin,
-    utilities.handleErrors(msgController.addMessage)
+    utilities.handleErrors(msgController.buildAddMessage)
 )
 
 /* ****************************
@@ -19,5 +19,12 @@ router.get("/",
     utilities.handleErrors(msgController.buildManagement)
 )
 
+/* ****************************
+* Process Add Message
+**************************** */
+router.post("/add-message", 
+    utilities.checkLogin,
+    utilities.handleErrors(msgController.addMessage)
+)
 
 module.exports = router
