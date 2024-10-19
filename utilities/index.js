@@ -1,5 +1,6 @@
 const invModel = require("../models/inventory-model")
 const accountModel = require("../models/account-model")
+const msgModel = require("../models/message-model")
 const Util = {}
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -204,5 +205,12 @@ Util.recipientListSelect = async function(message_from, message_to) {
   return recipientList
 }
 
+/* ************************
+ * Retrieve number of message by account
+ ************************** */
+Util.getMsgNum = async function(message_to) {
+  const data = await msgModel.getMessagesByMessage_to(message_to)
+  return data.length
+}
 
 module.exports = Util

@@ -13,4 +13,18 @@ async function addMessage(message_from, message_to, message_subject, message_bod
     }
 }
 
-module.exports = { addMessage }
+/* ***************************
+ *  Add message
+ * ************************** */
+async function getMessagesByMessage_to(message_to) {
+    try {
+        const sql = "SELECT * from message WHERE message_to = $1"
+        const result = await pool.query(sql, [message_to])
+        console.log('sql result: ', result)
+        return result.rows
+    } catch (error) {
+        throw new Error("Failed to retrieve messages.")
+    }
+}
+
+module.exports = { addMessage, getMessagesByMessage_to }
