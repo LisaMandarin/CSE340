@@ -43,7 +43,7 @@ validate.checkAddMsg = async(req, res, next) => {
             title: "New Message",
             errors,
             recipientListSelect,
-            account_id: res.locals.accountData.account_id,
+            message_from,
             message_subject,
             message_body,
         })

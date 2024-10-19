@@ -8,13 +8,14 @@ const msgModel = require('../models/message-model')
 * *************************************** */
 async function buildAddMessage(req, res, next) {
     let nav = await utilities.getNav()
+    const message_from = res.locals.accountData.account_id
     let recipientListSelect = await utilities.recipientListSelect()
     res.render("message/add-message", {
         nav,
         title: "New Message",
         errors: null,
         recipientListSelect,
-        account_id: res.locals.accountData.account_id
+        message_from,
     })
 }
 
@@ -47,7 +48,7 @@ async function addMessage(req, res) {
                 title: "New Message",
                 errors: null,
                 recipientListSelect,
-                account_id: res.locals.accountData.account_id,
+                message_from,
                 message_to,
                 message_subject,
                 message_body,
@@ -63,7 +64,7 @@ async function addMessage(req, res) {
             title: "New Message",
             errors: null,
             recipientListSelect,
-            account_id: res.locals.accountData.account_id,
+            message_from,
             message_to,
             message_subject,
             message_body,

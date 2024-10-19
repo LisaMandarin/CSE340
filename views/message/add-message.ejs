@@ -28,11 +28,7 @@
             <input type="submit" value="Send">
         </div>
         <div>
-            <input type="hidden" name="message_from" 
-                <% if (locals.account_id) { %>
-                    value="<%= locals.account_id%>"
-                <% } %>
-            >
+            <input type="hidden" name="message_from" value="<%= message_from %>">
             <input type="hidden" id="message_created" name="message_created">
         </div>
     </form>
