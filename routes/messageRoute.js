@@ -51,6 +51,8 @@ router.get("/reply/:message_id",
 **************************** */
 router.post("/reply-message",
     utilities.checkLogin,
+    msgValidate.replyMsgRules(),
+    msgValidate.checkReplyMsg,
     utilities.handleErrors(msgController.replyMessage)
 )
 

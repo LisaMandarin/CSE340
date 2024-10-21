@@ -25,7 +25,6 @@ validate.addMsgRules = () => {
 
         body("message_body")
         .trim()
-        .escape()
         .notEmpty().withMessage("Message content is required")
         .isLength({min: 2}).withMessage("At least 2 characters in message content"),
     ]
@@ -62,7 +61,6 @@ validate.replyMsgRules = () => {
 
         body("message_body")
         .trim()
-        .escape()
         .notEmpty().withMessage("Message content is required")
         .isLength({min: 2}).withMessage("At least 2 characters in message content"),
 
@@ -79,7 +77,6 @@ validate.replyMsgRules = () => {
 }
 
 validate.checkReplyMsg = async(req, res, next) => {
-    console.log("body.req: ", req.body)
     const { message_subject, message_body, message_to, message_from } = req.body
     const receiver_id = message_to
     const receiver_name = await accountModel.getFullNameByAccountId(receiver_id)
