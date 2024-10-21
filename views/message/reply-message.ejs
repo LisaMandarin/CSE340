@@ -13,7 +13,7 @@
         <% } %>
         <div>
             <label for="message_to" class="required">To</label><br>
-            <select><option value="<%= receiver_id %> "><%= receiver_name %></option></select>
+            <select name="message_to"><option value="<%= receiver_id %> "><%= receiver_name %></option></select>
         </div>
         <div>
             <label for="message_subject" class="required">Subject</label><br>
@@ -22,8 +22,7 @@
         <div>
             <label for="message_body" class="required">Message</label><br>
             <textarea id="message_body" name="message_body" rows="5" placeholder="Start your message here..." required>
->><%= receiver_name %> (<%= preMsg_created %>)
->><%= locals.prevMsg_body %>
+<%= message_body %>
             </textarea>
         </div>
         <div class="submit">

@@ -55,7 +55,6 @@ async function addMessage(req, res) {
                 message_to,
                 message_subject,
                 message_body,
-                message_created,
             })
         }
         req.flash("notice-success", "Message sent successfully")
@@ -101,8 +100,11 @@ async function buildReadMessage(req, res, next) {
     )
 }
 
+/* ****************************************
+*  Build Reply Message View
+* *************************************** */
 async function buildReplyMessage(req, res, next) {
-    let nav = utilities.getNav()
+    let nav = await utilities.getNav()
     const message_id = req.params.message_id
     const msgData = await msgModel.getMessageByMessage_id(message_id)
     if (!msgData) {
@@ -112,6 +114,8 @@ async function buildReplyMessage(req, res, next) {
     const sender_id = msgData.message_to
     const receiver_id = msgData.message_from
     const receiver_name = await accountModel.getFullNameByAccountId(receiver_id)
+    const prevMsg_created = msgData.message_created
+    const prevMsg_body = msgData.message_body
 
     res.render("message/reply-message", {
         nav,
@@ -121,9 +125,52 @@ async function buildReplyMessage(req, res, next) {
         receiver_name,      // A is sender
         sender_id,          // B is receiver
         message_subject: `RE: ${msgData.message_subject}`,
-        preMsg_created: msgData.message_created,
-        prevMsg_body: msgData.message_body
+        message_body: `>>${receiver_name} (${prevMsg_created})\n>>${prevMsg_body}`,
     })
 }
 
-module.exports = { buildAddMessage, buildManagement, addMessage, buildReadMessage, buildReplyMessage }
+/* ****************************************
+*  Reply Message
+* *************************************** */
+async function replyMessage(req, res) {
+    /* A reply to B
+    A is sender
+    B is receiver */
+    let nav = await utilities.getNav()
+    const { message_from, message_to, message_subject, message_body, message_created } = req.body
+    const receiver_id = message_to
+    const receiver_name = await accountModel.getFullNameByAccountId(receiver_id)
+    const sender_id = message_from
+    try {
+        const result = await msgModel.addMessage(message_from, message_to, message_subject, message_body, message_created)
+        if (!result) {
+            req.flash("notice", "Replying message process failed")
+            res.render("message/reply-message", {
+                nav,
+                title: "Reply Message",
+                errors: null,
+                receiver_id,
+                receiver_name,
+                sender_id,
+                message_subject,
+                message_body,
+            })
+        }
+        req.flash("notice-success", "Message sent successfully")
+        res.redirect("/message")
+    } catch (error) {
+        req.flash("notice", "Failed to send message.  Please try again.")
+        res.render("message/add-message", {
+            nav,
+            title: "New Message",
+            errors: null,
+            recipientListSelect,
+            message_from,
+            message_to,
+            message_subject,
+            message_body,
+        })
+    }
+}
+
+module.exports = { buildAddMessage, buildManagement, addMessage, buildReadMessage, buildReplyMessage, replyMessage }

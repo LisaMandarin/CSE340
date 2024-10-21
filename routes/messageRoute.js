@@ -45,4 +45,14 @@ router.get("/reply/:message_id",
     utilities.checkLogin,
     utilities.handleErrors(msgController.buildReplyMessage)
 )
+
+/* ****************************
+* Process reply-Message
+**************************** */
+router.post("/reply-message",
+    utilities.checkLogin,
+    utilities.handleErrors(msgController.replyMessage)
+)
+
+
 module.exports = router

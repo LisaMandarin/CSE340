@@ -112,6 +112,7 @@ async function getALLAccounts(account_id) {
  * ************************** */
 async function getFullNameByAccountId(account_id) {
   try {
+    console.log("account_id:", account_id)
     const sql = `SELECT account_firstname || ' ' || account_lastname AS account_fullname FROM account WHERE account_id = $1`
     const result = await pool.query(sql, [account_id])
     return result.rows[0].account_fullname

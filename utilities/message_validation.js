@@ -1,6 +1,7 @@
 const utilities = require(".")
 const { body, validationResult } = require("express-validator")
 const validate = {}
+const accountModel = require("../models/account-model")
 
 /*  **********************************
 *  Add-message Rules
@@ -37,13 +38,65 @@ validate.checkAddMsg = async(req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav()
-        let recipientListSelect = await utilities.recipientListSelect(message_to)
+        let recipientListSelect = await utilities.recipientListSelect(message_from, message_to)
         res.render("message/add-message", {
             nav,
             title: "New Message",
             errors,
             recipientListSelect,
             message_from,
+            message_subject,
+            message_body,
+        })
+        return
+    }
+    next()
+}
+
+validate.replyMsgRules = () => {
+    return [
+        body("message_subject")
+        .trim()
+        .escape()
+        .notEmpty().withMessage("Subject is required"),
+
+        body("message_body")
+        .trim()
+        .escape()
+        .notEmpty().withMessage("Message content is required")
+        .isLength({min: 2}).withMessage("At least 2 characters in message content"),
+
+        body("message_from")
+        .trim()
+        .escape()
+        .notEmpty(),
+
+        body("message_from")
+        .trim()
+        .escape()
+        .notEmpty()
+    ]
+}
+
+validate.checkReplyMsg = async(req, res, next) => {
+    console.log("body.req: ", req.body)
+    const { message_subject, message_body, message_to, message_from } = req.body
+    const receiver_id = message_to
+    const receiver_name = await accountModel.getFullNameByAccountId(receiver_id)
+    const sender_id = message_from
+
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        
+        res.render("message/reply-message", {
+            nav,
+            title: "Reply Message",
+            errors,
+            receiver_id,
+            receiver_name,
+            sender_id,
             message_subject,
             message_body,
         })
