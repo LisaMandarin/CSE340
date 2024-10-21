@@ -474,6 +474,40 @@ nav ul a:hover {
   width: 100%;
 }
 
+#read-message .message-box {
+  background-color: #eee;
+  box-shadow: 4px 4px 4px #ccc;
+  padding: 10px;
+}
+
+#read-message hr {
+  margin: 20px 0px;
+}
+
+#read-message .btn-box {
+  text-align: center;
+}
+
+#read-message .message-box > div {
+  padding: 6px;
+}
+
+#read-message .btn-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: rgb(241, 241, 241);
+  border: .5px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  margin: 10px 5px;
+}
+
+#read-message .btn-link:hover {
+  text-decoration: underline;
+  font-size: 1.1rem;
+}
+
 
 /* -----end of body styles----- */
 
@@ -550,4 +584,8 @@ footer p {
     width: 35%;
   }
 
+  #read-message .message-box {
+    width: 90%;
+    margin: auto;
+  }
 }
