@@ -222,8 +222,8 @@ Util.getMsgTable = async function(message_to) {
     let msgContent = 
     data.map(d => 
       `<tr>
-        <td>${d.message_created}</td>
-        <td><a href="/message/read/${d.message_id}">${d.message_subject}</a></td>
+        <td class="ellipsis">${d.message_created}</td>
+        <td class="ellipsis"><a href="/message/read/${d.message_id}">${d.message_subject}</a></td>
         <td>${d.sender_name}</td>
         <td>${d.message_read}</td>
       </tr>`
