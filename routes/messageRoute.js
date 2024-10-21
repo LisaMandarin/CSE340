@@ -56,5 +56,13 @@ router.post("/reply-message",
     utilities.handleErrors(msgController.replyMessage)
 )
 
+/* ****************************
+* Process mark-read
+**************************** */
+router.get("/mark-read/:message_id",
+    utilities.checkLogin,
+    utilities.handleErrors(msgController.markRead)
+)
+
 
 module.exports = router

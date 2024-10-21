@@ -39,6 +39,18 @@ async function getMessageByMessage_id(message_id) {
     }
 }
 
+/* ***************************
+ *  Update message_read by message_id
+ * ************************** */
+async function updateMessageRead(message_id) {
+    try {
+        const sql = "UPDATE message SET message_read = TRUE WHERE message_id = $1"
+        const result = await pool.query(sql, [message_id])
 
+        return result.rowCount
+    } catch (error) {
+        throw new Error("Failed to update message_read")
+    }
+}
 
-module.exports = { addMessage, getMessagesByMessage_to, getMessageByMessage_id }
+module.exports = { addMessage, getMessagesByMessage_to, getMessageByMessage_id, updateMessageRead }

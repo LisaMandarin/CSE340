@@ -329,6 +329,12 @@ nav ul a:hover {
   color: white;
   background-color: #0db500;
 }
+
+.notice {
+  color: white;
+  background-color: #b50000;
+}
+
 .form-container .notice {
   color: white;
   background-color: #b50000;

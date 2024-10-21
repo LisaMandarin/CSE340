@@ -76,7 +76,7 @@ async function addMessage(req, res) {
 }
 
 /* ****************************************
-*  Read Message
+*  Build Read Message View
 * *************************************** */
 async function buildReadMessage(req, res, next) {
     const message_id = req.params.message_id
@@ -173,4 +173,24 @@ async function replyMessage(req, res) {
     }
 }
 
-module.exports = { buildAddMessage, buildManagement, addMessage, buildReadMessage, buildReplyMessage, replyMessage }
+/* ****************************************
+*  Mark-read
+* *************************************** */
+async function markRead(req, res) {
+    const message_id = req.params.message_id
+    try {
+        const result = await msgModel.updateMessageRead(message_id)
+        if (result) {
+            req.flash("notice-success", "The message has been marked as read")
+            res.redirect("/message")
+        } else {
+            req.flash("notice", "Unable to mark the message as read")
+            res.redirect("/message")
+        }
+    } catch (error) {
+        req.flash("notice", "Failed to mark the message as read")
+        res.redirect(`/message/mark-read/${message_id}`)
+    }
+}
+
+module.exports = { buildAddMessage, buildManagement, addMessage, buildReadMessage, buildReplyMessage, replyMessage, markRead }
