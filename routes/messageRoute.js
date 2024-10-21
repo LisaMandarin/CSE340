@@ -34,6 +34,7 @@ router.post("/add-message",
 * Build read-Message
 **************************** */
 router.get("/read/:message_id", 
+    utilities.checkLogin,
     utilities.handleErrors(msgController.buildReadMessage)
 )
 

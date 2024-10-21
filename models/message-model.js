@@ -31,7 +31,7 @@ async function getMessagesByMessage_to(message_to) {
  * ************************** */
 async function getMessageByMessage_id(message_id) {
     try {
-        const sql = "SELECT * FROM message WHERE message_id = $1"
+        const sql = "SELECT message_id, message_subject, message_body, message_from, message_to, message_read, message_archived, account_firstname || ' ' || account_lastname AS sender_name FROM message JOIN account ON message_from = account_id WHERE message_id = $1"
         const result = await pool.query(sql, [message_id])
         return result.rows[0]
     } catch (error) {

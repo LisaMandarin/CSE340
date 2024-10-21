@@ -89,7 +89,7 @@ async function buildReadMessage(req, res, next) {
         errors: null,
         title: msgData.message_subject,
         subject: msgData.message_subject,
-        from: msgData.message_from,
+        sender_name: msgData.sender_name,
         content: msgData.message_body,
         }
     )
