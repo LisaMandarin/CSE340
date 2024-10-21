@@ -433,10 +433,25 @@ nav ul a:hover {
   margin: auto;
   font-family: var(--font1);
   font-size: .5rem;
+  border-collapse: collapse;
 }
 
 #message-management table th {
   font-weight: bolder;
+  text-align: start;
+}
+
+#message-management table thead {
+  border: 1px solid #ccc;
+}
+
+#message-management table th:first-child {
+  width: 100px;
+}
+
+#message-management table th:nth-child(2) {
+  width: 100px;
+  text-overflow: ellipsis;
 }
 
 #message-management table tbody tr:nth-child(even) {
@@ -445,8 +460,9 @@ nav ul a:hover {
 
 #message-management table td {
   width: fit-content;
-  padding: 5px;
+  padding: 10px;
 }
+
 
 #add-message .reminder {
   width: 400px;
@@ -484,6 +500,7 @@ footer p {
     gap: 20px;
     padding: 20px;
   }
+
 }
 
 @media screen and (min-width: 460px) {
@@ -523,6 +540,14 @@ footer p {
   #message-management table {
     width: 90%;
     font-size: 1rem;
+  }
+
+  #message-management table th:first-child {
+    width: 35%;
+  }
+  
+  #message-management table th:nth-child(2) {
+    width: 35%;
   }
 
 }
