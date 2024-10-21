@@ -3,6 +3,7 @@ const accountModel = require("../models/account-model")
 const msgModel = require("../models/message-model")
 const Util = {}
 const jwt = require("jsonwebtoken")
+const dayjs = require("dayjs")
 require("dotenv").config()
 
 /* ************************
@@ -220,13 +221,16 @@ Util.getMsgTable = async function(message_to) {
   const data = await msgModel.getMessagesByMessage_to(message_to)
   if (data && data.length > 0) {
     let msgContent = 
-    data.map(d => 
-      `<tr>
-        <td class="ellipsis">${d.message_created}</td>
-        <td class="ellipsis"><a href="/message/read/${d.message_id}">${d.message_subject}</a></td>
-        <td>${d.sender_name}</td>
-        <td>${d.message_read}</td>
-      </tr>`
+    data.map(d => {
+      let formattedDate = dayjs(d.message_created).format('DD-MM-YYYY HH:mm')
+      return `
+        <tr>
+          <td class="ellipsis">${formattedDate}</td>
+          <td class="ellipsis"><a href="/message/read/${d.message_id}">${d.message_subject}</a></td>
+          <td>${d.sender_name}</td>
+          <td>${d.message_read}</td>
+        </tr>`
+    }
     ).join("")
     
     return msgContent

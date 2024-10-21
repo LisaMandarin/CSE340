@@ -454,14 +454,12 @@ nav ul a:hover {
   padding: 10px;
 }
 
-
 #message-management .ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100px;
 } 
-
 
 #add-message .reminder {
   width: 400px;
