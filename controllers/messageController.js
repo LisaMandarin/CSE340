@@ -193,4 +193,24 @@ async function markRead(req, res) {
     }
 }
 
-module.exports = { buildAddMessage, buildManagement, addMessage, buildReadMessage, buildReplyMessage, replyMessage, markRead }
+/* ****************************************
+*  Archive Message
+* *************************************** */
+async function archiveMessage(req, res) {
+    const message_id = req.params.message_id
+    try {
+        const result = await msgModel.archiveMessage(message_id)
+        if (result) {
+            req.flash("notice-success", "The message has been archived successfully")
+            res.redirect("/message")
+        } else {
+            req.flash("notice", "Unable to archive the message")
+            res.redirect("/message")
+        }
+    } catch (error) {
+        req.flash("notice", "Failed to archive the message")
+        req.redirect(`/message/archive/${message_id}`)
+    }
+}
+
+module.exports = { buildAddMessage, buildManagement, addMessage, buildReadMessage, buildReplyMessage, replyMessage, markRead, archiveMessage }

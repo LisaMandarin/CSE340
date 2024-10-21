@@ -64,5 +64,12 @@ router.get("/mark-read/:message_id",
     utilities.handleErrors(msgController.markRead)
 )
 
+/* ****************************
+* Process mark-read
+**************************** */
+router.get("/archive/:message_id",
+    utilities.checkLogin,
+    utilities.handleErrors(msgController.archiveMessage)
+)
 
 module.exports = router
