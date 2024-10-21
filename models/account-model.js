@@ -107,4 +107,18 @@ async function getALLAccounts(account_id) {
   }
 }
 
-  module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, getAccountById, updatePassword, deleteAccountByEmailId, getALLAccounts }
+/* ***************************
+ *  Get full name by accound_id
+ * ************************** */
+async function getFullNameByAccountId(account_id) {
+  try {
+    const sql = `SELECT account_firstname || ' ' || account_lastname AS account_fullname FROM account WHERE account_id = $1`
+    const result = await pool.query(sql, [account_id])
+    return result.rows[0].account_fullname
+  } catch (error) {
+    throw new Error("Failed to retrieve account full name")
+  }
+}
+
+
+  module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, getAccountById, updatePassword, deleteAccountByEmailId, getALLAccounts, getFullNameByAccountId }

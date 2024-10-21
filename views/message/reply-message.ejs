@@ -13,18 +13,17 @@
         <% } %>
         <div>
             <label for="message_to" class="required">To</label><br>
-            <select><option value="<%= receiver_id %> ">receiver_name</option></select>
-            <input type="text" id="message_to" name="message_to" value="<%= receiver_id %>" readonly>
+            <select><option value="<%= receiver_id %> "><%= receiver_name %></option></select>
         </div>
         <div>
             <label for="message_subject" class="required">Subject</label><br>
-            <input type="text" id="message_subject" name="message_subject" placeholder="Enter subject" required value="Re: <%= locals.message_subject %>">
+            <input type="text" id="message_subject" name="message_subject" placeholder="Enter subject" required value="<%= locals.message_subject %>">
         </div>
         <div>
             <label for="message_body" class="required">Message</label><br>
             <textarea id="message_body" name="message_body" rows="5" placeholder="Start your message here..." required>
-                <%= sender_name %> (<%= message_created %> )
-                <%= locals.message_body %>
+>><%= receiver_name %> (<%= preMsg_created %>)
+>><%= locals.prevMsg_body %>
             </textarea>
         </div>
         <div class="submit">

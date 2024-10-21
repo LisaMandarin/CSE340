@@ -1,6 +1,7 @@
 const Util = require('../utilities')
 const utilities = require('../utilities')
 const msgModel = require('../models/message-model')
+const accountModel = require('../models/account-model')
 
 
 /* ****************************************
@@ -82,7 +83,10 @@ async function buildReadMessage(req, res, next) {
     const message_id = req.params.message_id
     let nav = await utilities.getNav()
     const msgData = await msgModel.getMessageByMessage_id(message_id)
-    console.log(msgData)
+    if (!msgData) {
+        req.flash("notice", "Unable to read message")
+        res.redirect("/message/")
+    }
     res.render(
         "message/read-message", {
         nav,
@@ -91,9 +95,35 @@ async function buildReadMessage(req, res, next) {
         subject: msgData.message_subject,
         sender_name: msgData.sender_name,
         content: msgData.message_body,
-        message_to: msgData.message_to
+        message_to: msgData.message_to,
+        message_id: msgData.message_id
         }
     )
 }
 
-module.exports = { buildAddMessage, buildManagement, addMessage, buildReadMessage }
+async function buildReplyMessage(req, res, next) {
+    let nav = utilities.getNav()
+    const message_id = req.params.message_id
+    const msgData = await msgModel.getMessageByMessage_id(message_id)
+    if (!msgData) {
+        req.flash("notice", "Unable to reply message")
+        res.redirect(`/message/read/${message_id}`)
+    }
+    const sender_id = msgData.message_to
+    const receiver_id = msgData.message_from
+    const receiver_name = await accountModel.getFullNameByAccountId(receiver_id)
+
+    res.render("message/reply-message", {
+        nav,
+        title: "Reply Message",
+        errors: null,
+        receiver_id,        // A reply to B
+        receiver_name,      // A is sender
+        sender_id,          // B is receiver
+        message_subject: `RE: ${msgData.message_subject}`,
+        preMsg_created: msgData.message_created,
+        prevMsg_body: msgData.message_body
+    })
+}
+
+module.exports = { buildAddMessage, buildManagement, addMessage, buildReadMessage, buildReplyMessage }

@@ -38,4 +38,11 @@ router.get("/read/:message_id",
     utilities.handleErrors(msgController.buildReadMessage)
 )
 
+/* ****************************
+* Build reply-Message
+**************************** */
+router.get("/reply/:message_id",
+    utilities.checkLogin,
+    utilities.handleErrors(msgController.buildReplyMessage)
+)
 module.exports = router
