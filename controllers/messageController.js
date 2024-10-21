@@ -213,4 +213,20 @@ async function archiveMessage(req, res) {
     }
 }
 
-module.exports = { buildAddMessage, buildManagement, addMessage, buildReadMessage, buildReplyMessage, replyMessage, markRead, archiveMessage }
+/* ****************************************
+*  Build archived messages view
+* *************************************** */
+async function buildArchive(req, res, next) {
+    let nav = await utilities.getNav()
+    const account_name = `${res.locals.accountData.account_firstname} ${res.locals.accountData.account_lastname}`
+    let archivedMsgTable = await utilities.getArchivedMsgTable(res.locals.accountData.account_id)
+    
+    res.render("message/archive-management", {
+        nav,
+        title: `${account_name} Archives`,
+        archivedMsgTable,
+        errors: null
+    })
+}
+
+module.exports = { buildAddMessage, buildManagement, addMessage, buildReadMessage, buildReplyMessage, replyMessage, markRead, archiveMessage, buildArchive }

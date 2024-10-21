@@ -65,4 +65,18 @@ async function archiveMessage(message_id) {
     }
 }
 
-module.exports = { addMessage, getMessagesByMessage_to, getMessageByMessage_id, updateMessageRead, archiveMessage }
+/* ***************************
+ *  Get archived messages by message_to
+ * ************************** */
+async function getArchivedMsgByFrom(message_to) {
+    try {
+        const sql = "SELECT * from message WHERE message_to = $1 AND message_archived = TRUE"
+        const result = await pool.query(sql, [message_to])
+        
+        return result.rows
+    } catch (error) {
+        throw new Error("Failed to get archived messages")
+    }
+}
+
+module.exports = { addMessage, getMessagesByMessage_to, getMessageByMessage_id, updateMessageRead, archiveMessage, getArchivedMsgByFrom }

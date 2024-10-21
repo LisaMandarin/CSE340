@@ -240,4 +240,32 @@ Util.getMsgTable = async function(message_to) {
   }
 }
 
+/* ************************
+ * Retrieve archived message table by message_to and message_archived
+ ************************** */
+Util.getArchivedMsgTable = async function(message_to) {
+  const data = await msgModel.getArchivedMsgByFrom(message_to)
+  if (data && data.length > 0) {
+    const msgContent = await Promise.all(
+      data.map(async (d) => {
+        const formattedDate = dayjs(d.message_created).format('DD-MM-YYYY HH:mm');
+        const sender_name = await accountModel.getFullNameByAccountId(d.message_from);
+
+        return `
+          <tr>
+            <td class="ellipsis">${formattedDate}</td>
+            <td class="ellipsis"><a href="/message/read/${d.message_id}">${d.message_subject}</a></td>
+            <td>${sender_name}</td>
+            <td>${d.message_read}</td>
+          </tr>`;
+      })
+    );
+
+    return msgContent.join("");
+  } else {
+    console.error("Failed to retrieve archived messages")
+    return
+  }
+}
+
 module.exports = Util

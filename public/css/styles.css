@@ -434,7 +434,7 @@ nav ul a:hover {
   color: white;
 }
 
-#message-management table {
+#message-management table, #archive-management table {
   width: fit-content;
   margin: auto;
   font-family: var(--font1);
@@ -442,25 +442,25 @@ nav ul a:hover {
   border-collapse: collapse;
 }
 
-#message-management table th {
+#message-management table th, #archive-management table th {
   font-weight: bolder;
   text-align: start;
 }
 
-#message-management table thead {
+#message-management table thead, #archive-management table thead {
   border: 1px solid #ccc;
 }
 
-#message-management table tbody tr:nth-child(even) {
+#message-management table tbody tr:nth-child(even), #archive-management table tbody tr:nth-child(even) {
   background-color: #c2c4c9;
 }
 
-#message-management table td {
+#message-management table td, #archive-management table td {
   width: fit-content;
   padding: 10px;
 }
 
-#message-management .ellipsis {
+#message-management .ellipsis, #archive-management .ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -511,7 +511,9 @@ nav ul a:hover {
   font-size: 1.1rem;
 }
 
-
+#archive-management > div {
+  margin: 10px 0px;
+}
 /* -----end of body styles----- */
 
 /* -----footer styles----- */
@@ -574,7 +576,7 @@ footer p {
     width: 90%;
   }
 
-  #message-management table {
+  #message-management table, #archive-management table {
     width: 90%;
     font-size: 1rem;
   }

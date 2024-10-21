@@ -65,11 +65,20 @@ router.get("/mark-read/:message_id",
 )
 
 /* ****************************
-* Process mark-read
+* Process archive message
 **************************** */
 router.get("/archive/:message_id",
     utilities.checkLogin,
     utilities.handleErrors(msgController.archiveMessage)
 )
+
+/* ****************************
+* Process archive management
+**************************** */
+router.get("/archive",
+    utilities.checkLogin,
+    utilities.handleErrors(msgController.buildArchive)
+)
+
 
 module.exports = router

@@ -1,4 +1,4 @@
-<div id="message-management">
+<div id="archive-management">
     <h1><%= title %></h1>
 
     <%- messages() %>
@@ -11,10 +11,7 @@
         </ul>
     <% } %>
 
-    <ul class="font-1">
-        <li><a href="/message/add-message">Create New Message</a></li>
-        <li><a href="/message/archive">View Archived Messages</a></li>
-    </ul>
+    <div><a href="/message">Return to Inbox</a></div>
 
     <div>
         <table>
@@ -27,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                <%- msgTable %>
+                <%- archivedMsgTable %>
             </tbody>
         </table>
     </div>
