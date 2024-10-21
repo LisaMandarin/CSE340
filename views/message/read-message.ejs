@@ -1,0 +1,32 @@
+<div id="read-message">
+    <h1><%= title %></h1>
+
+    <%- messages() %>
+
+    <% if (errors) { %>
+        <ul class="notice">
+            <% errors.array().forEach(error => { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+    <div>
+        <div>
+            <span>Subject: </span>
+            <span><%= subject %></span>
+        </div>
+        <div>
+            <span>From: </span>
+            <span><%= from %> </span>
+        </div>
+        <div>
+            <span>Message: </span><br>
+            <span><%= content %> </span>
+        </div>
+    </div>
+    <div><button>Reply</button></div>
+    <div><button>Mark as Read</button></div>
+    <div><button>Archive Message</button></div>
+    <div><button>Delete Message</button></div>
+</div>

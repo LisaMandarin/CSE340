@@ -223,7 +223,7 @@ Util.getMsgTable = async function(message_to) {
     data.map(d => 
       `<tr>
         <td>${d.message_created}</td>
-        <td>${d.message_subject}</td>
+        <td><a href="/message/read/${d.message_id}">${d.message_subject}</a></td>
         <td>${d.sender_name}</td>
         <td>${d.message_read}</td>
       </tr>`

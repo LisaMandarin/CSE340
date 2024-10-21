@@ -30,4 +30,11 @@ router.post("/add-message",
     utilities.handleErrors(msgController.addMessage)
 )
 
+/* ****************************
+* Build read-Message
+**************************** */
+router.get("/read/:message_id", 
+    utilities.handleErrors(msgController.buildReadMessage)
+)
+
 module.exports = router

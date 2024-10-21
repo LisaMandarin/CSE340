@@ -4,11 +4,11 @@
     <%- messages() %>
 
     <% if (errors) { %>
-        <% errors.array().forEach(error => { %>
-            <ul class="notice">
+        <ul class="notice">
+            <% errors.array().forEach(error => { %>
                 <li><%= error.msg %></li>
-            </ul>
-        <% }) %>
+            <% }) %>
+        </ul>
     <% } %>
 
     <ul class="font-1">

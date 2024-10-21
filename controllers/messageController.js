@@ -75,4 +75,24 @@ async function addMessage(req, res) {
     }
 }
 
-module.exports = { buildAddMessage, buildManagement, addMessage }
+/* ****************************************
+*  Read Message
+* *************************************** */
+async function buildReadMessage(req, res, next) {
+    const message_id = req.params.message_id
+    let nav = await utilities.getNav()
+    const msgData = await msgModel.getMessageByMessage_id(message_id)
+    console.log(msgData)
+    res.render(
+        "message/read-message", {
+        nav,
+        errors: null,
+        title: msgData.message_subject,
+        subject: msgData.message_subject,
+        from: msgData.message_from,
+        content: msgData.message_body,
+        }
+    )
+}
+
+module.exports = { buildAddMessage, buildManagement, addMessage, buildReadMessage }
