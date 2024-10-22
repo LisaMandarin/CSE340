@@ -7,7 +7,7 @@ const accountModel = require('../models/account-model')
 /* ****************************************
 *  Build add message view
 * *************************************** */
-async function buildAddMessage(req, res, next) {
+async function buildAddMessage(req, res) {
     let nav = await utilities.getNav()
     const message_from = res.locals.accountData.account_id
     let recipientListSelect = await utilities.recipientListSelect(message_from, null)
@@ -23,7 +23,7 @@ async function buildAddMessage(req, res, next) {
 /* ****************************************
 *  Build message management view
 * *************************************** */
-async function buildManagement(req, res, next) {
+async function buildManagement(req, res) {
     let nav = await utilities.getNav()
     const name = `${res.locals.accountData.account_firstname} ${res.locals.accountData.account_lastname}`
     let msgTable = await utilities.getMsgTable(res.locals.accountData.account_id)
@@ -78,7 +78,7 @@ async function addMessage(req, res) {
 /* ****************************************
 *  Build Read Message View
 * *************************************** */
-async function buildReadMessage(req, res, next) {
+async function buildReadMessage(req, res) {
     const message_id = req.params.message_id
     let nav = await utilities.getNav()
     const msgData = await msgModel.getMessageByMessage_id(message_id)
