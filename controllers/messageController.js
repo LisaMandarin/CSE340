@@ -95,7 +95,9 @@ async function buildReadMessage(req, res, next) {
         sender_name: msgData.sender_name,
         content: msgData.message_body,
         message_to: msgData.message_to,
-        message_id: msgData.message_id
+        message_id: msgData.message_id,
+        message_read: msgData.message_read,
+        message_archived: msgData.message_archived
         }
     )
 }

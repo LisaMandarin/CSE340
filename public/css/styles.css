@@ -497,19 +497,18 @@ nav ul a:hover {
 
 #read-message .btn-link {
   display: inline-block;
-  padding: 10px 20px;
-  background-color: rgb(241, 241, 241);
-  border: .5px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
   text-decoration: none;
   margin: 10px 5px;
+  padding: 10px 20px;
   cursor: pointer;
 }
 
-#read-message .btn-link:hover {
+#read-message .btn-link:not([disabled]):hover {
   text-decoration: underline;
-  font-size: 1.1rem;
+}
+
+#read-message .btn-link[disabled] {
+  cursor: not-allowed;
 }
 
 #archive-management > div {
