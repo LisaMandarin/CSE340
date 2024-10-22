@@ -125,7 +125,7 @@ async function buildReplyMessage(req, res, next) {
         receiver_name,      // A is sender
         sender_id,          // B is receiver
         message_subject: `RE: ${msgData.message_subject}`,
-        message_body: `>>${receiver_name} (${prevMsg_created})\n>>${prevMsg_body}`,
+        message_body: `${receiver_name} (${prevMsg_created})\n${prevMsg_body}`,
     })
 }
 
