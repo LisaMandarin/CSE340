@@ -219,14 +219,17 @@ Util.getUnreadMsgNum = async function(message_to) {
  ************************** */
 Util.getMsgTable = async function(message_to) {
   const data = await msgModel.getMessagesByMessage_to(message_to)
+  
   if (data && data.length > 0) {
     let msgContent = 
     data.map(d => {
       let formattedDate = dayjs(d.message_created).format('DD-MM-YYYY HH:mm')
+      let mailIcon = d.message_read ? `<i class="fa fa-envelope-o" aria-hidden="true"></i> ` : `<i class="fa fa-envelope" aria-hidden="true"></i> `
+      
       return `
         <tr>
           <td class="ellipsis">${formattedDate}</td>
-          <td class="ellipsis"><a href="/message/read/${d.message_id}">${d.message_subject}</a></td>
+          <td class="ellipsis">${mailIcon}<a href="/message/read/${d.message_id}">${d.message_subject}</a></td>
           <td>${d.sender_name}</td>
           <td>${d.message_read}</td>
         </tr>`
