@@ -79,4 +79,17 @@ async function getArchivedMsgByFrom(message_to) {
     }
 }
 
-module.exports = { addMessage, getMessagesByMessage_to, getMessageByMessage_id, updateMessageRead, archiveMessage, getArchivedMsgByFrom }
+/* ***************************
+ *  Delete messages by message_id
+ * ************************** */
+async function deleteMessageByMsgId(message_id) {
+    try {
+        const sql = "DELETE FROM message WHERE message_id = $1"
+        const result = await pool.query(sql, [message_id])
+        return result.rowCount
+    } catch (error) {
+        throw new Error("Failed to delete message")
+    }
+}
+
+module.exports = { addMessage, getMessagesByMessage_to, getMessageByMessage_id, updateMessageRead, archiveMessage, getArchivedMsgByFrom, deleteMessageByMsgId }

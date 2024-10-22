@@ -80,5 +80,12 @@ router.get("/archive",
     utilities.handleErrors(msgController.buildArchive)
 )
 
+/* ****************************
+* Process delete message
+**************************** */
+router.get("/delete/:message_id", 
+    utilities.checkLogin,
+    utilities.handleErrors(msgController.deleteMessage)
+)
 
 module.exports = router

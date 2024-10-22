@@ -229,4 +229,24 @@ async function buildArchive(req, res, next) {
     })
 }
 
-module.exports = { buildAddMessage, buildManagement, addMessage, buildReadMessage, buildReplyMessage, replyMessage, markRead, archiveMessage, buildArchive }
+/* ****************************************
+*  Delete Message
+* *************************************** */
+async function deleteMessage(req, res) {
+    const message_id = req.params.message_id
+    try {
+        const result = await msgModel.deleteMessageByMsgId(message_id)
+        if (result) {
+            req.flash("notice-success", "You have deleted the message.")
+            res.redirect("/message")
+        } else {
+            req.flash("notice", "Deleting message process failed.")
+            res.redirect(`/message/read/${message_id}`)
+        }
+    } catch (error) {
+        req.flash("notice", "Unable to delete message.  Please try later.")
+        res.redirect(`/message/read/${message_id}`)
+    }
+}
+
+module.exports = { buildAddMessage, buildManagement, addMessage, buildReadMessage, buildReplyMessage, replyMessage, markRead, archiveMessage, buildArchive, deleteMessage }
