@@ -177,7 +177,7 @@ async function replyMessage(req, res) {
 *  Mark-read
 * *************************************** */
 async function markRead(req, res) {
-    const message_id = req.params.message_id
+    const { message_id } = req.body
     try {
         const result = await msgModel.updateMessageRead(message_id)
         if (result) {
@@ -185,11 +185,11 @@ async function markRead(req, res) {
             res.redirect("/message")
         } else {
             req.flash("notice", "Unable to mark the message as read")
-            res.redirect("/message")
+            res.redirect(`/message/read/${message_id}`)
         }
     } catch (error) {
         req.flash("notice", "Failed to mark the message as read")
-        res.redirect(`/message/mark-read/${message_id}`)
+        res.redirect(`/message`)
     }
 }
 
@@ -197,7 +197,7 @@ async function markRead(req, res) {
 *  Archive Message
 * *************************************** */
 async function archiveMessage(req, res) {
-    const message_id = req.params.message_id
+    const { message_id } = req.body
     try {
         const result = await msgModel.archiveMessage(message_id)
         if (result) {
@@ -233,7 +233,7 @@ async function buildArchive(req, res, next) {
 *  Delete Message
 * *************************************** */
 async function deleteMessage(req, res) {
-    const message_id = req.params.message_id
+    const { message_id } = req.body
     try {
         const result = await msgModel.deleteMessageByMsgId(message_id)
         if (result) {

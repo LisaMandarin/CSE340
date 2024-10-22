@@ -59,7 +59,7 @@ router.post("/reply-message",
 /* ****************************
 * Process mark-read
 **************************** */
-router.get("/mark-read/:message_id",
+router.post("/mark-read",
     utilities.checkLogin,
     utilities.handleErrors(msgController.markRead)
 )
@@ -67,7 +67,7 @@ router.get("/mark-read/:message_id",
 /* ****************************
 * Process archive message
 **************************** */
-router.get("/archive/:message_id",
+router.post("/archive",
     utilities.checkLogin,
     utilities.handleErrors(msgController.archiveMessage)
 )
@@ -83,7 +83,7 @@ router.get("/archive",
 /* ****************************
 * Process delete message
 **************************** */
-router.get("/delete/:message_id", 
+router.post("/delete", 
     utilities.checkLogin,
     utilities.handleErrors(msgController.deleteMessage)
 )

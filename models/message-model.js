@@ -14,15 +14,28 @@ async function addMessage(message_from, message_to, message_subject, message_bod
 }
 
 /* ***************************
- *  Get message by Receiver
+ *  Get unread message by Receiver
  * ************************** */
-async function getMessagesByMessage_to(message_to) {
+async function getUnreadMsgByMessage_to(message_to) {
     try {
-        const sql = "SELECT message_id, message_created, message_subject, message_body, message_read, message_archived, account_firstname || ' ' || account_lastname AS sender_name FROM message JOIN account ON message.message_from = account.account_id WHERE message_archived = FALSE AND message_to = $1"
+        const sql = "SELECT * FROM message JOIN account ON message.message_from = account.account_id WHERE message_archived = FALSE AND message_read = FALSE AND message_to = $1"
         const result = await pool.query(sql, [message_to])
         return result.rows
     } catch (error) {
         throw new Error("Failed to retrieve messages.")
+    }
+}
+
+/* ***************************
+ *  Get message by Receiver
+ * ************************** */
+async function getMessagesByMessage_to(message_to) {
+    try {    
+        const sql = "SELECT message_id, message_created, message_subject, message_body, message_read, message_archived, account_firstname || ' ' || account_lastname AS sender_name FROM message JOIN account ON message.message_from = account.account_id WHERE message_archived = FALSE AND message_to = $1 ORDER BY message_read ASC"
+        const result = await pool.query(sql, [message_to])
+        return result.rows
+    } catch (error) {
+        throw new Error("Failed to retrieve messages")
     }
 }
 
@@ -92,4 +105,4 @@ async function deleteMessageByMsgId(message_id) {
     }
 }
 
-module.exports = { addMessage, getMessagesByMessage_to, getMessageByMessage_id, updateMessageRead, archiveMessage, getArchivedMsgByFrom, deleteMessageByMsgId }
+module.exports = { addMessage, getUnreadMsgByMessage_to, getMessagesByMessage_to, getMessageByMessage_id, updateMessageRead, archiveMessage, getArchivedMsgByFrom, deleteMessageByMsgId }

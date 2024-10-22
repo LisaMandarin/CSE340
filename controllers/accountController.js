@@ -129,7 +129,7 @@ async function accountLogin(req, res) {
 async function buildManagement(req, res, next) {
   let nav = await utilities.getNav()
   let link = await utilities.buildAccountLink(res.locals.accountData)
-  let msgNum = await utilities.getMsgNum(res.locals.accountData.account_id)
+  let unreadMsgNum = await utilities.getUnreadMsgNum(res.locals.accountData.account_id)
 
   res.render("account/management", {
     nav,
@@ -137,7 +137,7 @@ async function buildManagement(req, res, next) {
     errors: null,
     account_firstname: res.locals.accountData.account_firstname,
     link,
-    msgNum
+    unreadMsgNum
   })
 } 
 

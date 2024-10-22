@@ -207,10 +207,10 @@ Util.recipientListSelect = async function(message_from, message_to) {
 }
 
 /* ************************
- * Retrieve number of message by account
+ * Retrieve number of unread message by account and message_read
  ************************** */
-Util.getMsgNum = async function(message_to) {
-  const data = await msgModel.getMessagesByMessage_to(message_to)
+Util.getUnreadMsgNum = async function(message_to) {
+  const data = await msgModel.getUnreadMsgByMessage_to(message_to)
   return data.length
 }
 

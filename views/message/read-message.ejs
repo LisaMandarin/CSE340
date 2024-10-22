@@ -28,18 +28,22 @@
     <hr>
     <div><a href="/message">Return to Inbox</a></div>
     <div class="font-1 btn-box">
-        <a href="/message/reply/<%= message_id %>" class="btn-link">
-            Reply
-        </a>
-        <a href="/message/mark-read/<%= message_id %>" class="btn-link">
-            Mark as Read
-        </a>
-        <a href="/message/archive/<%= message_id %>" class="btn-link">
-            Archive Message
-        </a>
-        <a href="/message/delete/<%= message_id %>" class="btn-link">
-            Delete Message
-        </a>
-    
-        
+        <button class="btn-link" title="Reply to this message">
+            <a href="/message/reply/<%= message_id %>">
+                Reply
+            </a>
+        </button>
+        <form action="/message/mark-read" method="POST" style="display: inline;">
+            <input type="hidden" name="message_id" value="<%= message_id %>">
+            <button type="submit" title="Mark message as read" class="btn-link">Mark as Read</button>
+        </form>
+        <form action="/message/archive" method="POST" style="display: inline;">
+            <input type="hidden" name="message_id" value="<%= message_id %>">
+            <button type="submit" title="Archive message" class="btn-link">Archive Message</button>
+        </form>
+        <form action="/message/delete" method="POST" style="display: inline;">
+            <input type="hidden" name="message_id" value="<%= message_id %>">
+            <button type="submit" title="Delete Message" class="btn-link">Delete Message</button>
+        </form>
+    </div>
 </div>
