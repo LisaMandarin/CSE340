@@ -504,6 +504,7 @@ nav ul a:hover {
   text-align: center;
   text-decoration: none;
   margin: 10px 5px;
+  cursor: pointer;
 }
 
 #read-message .btn-link:hover {
