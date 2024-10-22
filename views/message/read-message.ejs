@@ -28,10 +28,8 @@
     <hr>
     <div><a href="/message">Return to Inbox</a></div>
     <div class="font-1 btn-box">
-        <button class="btn-link" title="Reply to this message">
-            <a href="/message/reply/<%= message_id %>">
-                Reply
-            </a>
+        <button class="btn-link" title="Reply to this message" onclick="reply('<%= message_id %>')">
+            Reply   
         </button>
         <form action="/message/mark-read" method="POST" style="display: inline;">
             <input type="hidden" name="message_id" value="<%= message_id %>">
@@ -47,3 +45,9 @@
         </form>
     </div>
 </div>
+
+<script>
+    function reply(message_id) {
+        window.location.href = `/message/reply/<%= message_id %>`
+    }
+</script>
