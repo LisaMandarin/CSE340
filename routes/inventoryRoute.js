@@ -24,26 +24,38 @@ router.get("/",
     utilities.handleErrors(invController.buildManagement));
 
 // Route to build add-inventory view
-router.get("/add-classification", utilities.handleErrors(invController.buildAddView));
+router.get("/add-classification", 
+    utilities.checkLogin, 
+    utilities.checkAuthZ,
+    utilities.handleErrors(invController.buildAddView));
 
 // Route to build add-classification view
-router.get("/add-inventory", utilities.handleErrors(invController.buildAddInv));
+router.get("/add-inventory", 
+    utilities.checkLogin, 
+    utilities.checkAuthZ,
+    utilities.handleErrors(invController.buildAddInv));
 
 // Route to retrieve inventory json by classification (used for edit/delete inventory)
 router.get(
     "/getInventory/:classification_id",
+    utilities.checkLogin, 
+    utilities.checkAuthZ,
     utilities.handleErrors(invController.getInventoryJSON)
 )
 
 // Route to build edit-inventory view
 router.get(
     "/edit/:inv_id",
+    utilities.checkLogin, 
+    utilities.checkAuthZ,
     utilities.handleErrors(invController.editInvView)
 )
 
 // Route to build delete-inventory view
 router.get(
     "/delete/:inv_id",
+    utilities.checkLogin, 
+    utilities.checkAuthZ,
     utilities.handleErrors(invController.deleteInvView)
 )
 
